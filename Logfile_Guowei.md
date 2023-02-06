@@ -1,7 +1,7 @@
-# Week 1 (23-29 Jan):
+# Week 1 (27 Jan-3 Feb):
 
 > Introduced to the company, met with the client, and held a discussion about the application (functionalities and requirements) after that decided with teammates the     roles and the plan to follow as well as the things needed to be done until the next meeting.
 
-# Week 2 (30 Jan-5 Feb):
+# Week 2 (3 Feb-10 Feb):
 
 
