@@ -1,0 +1,29 @@
+Requirements:
+	- Create prototype app with no functionality.
+	- Adjust interface design with "dummy" questions.
+	- Functionality to be implemented:
+		- Web app.
+		- Allow for administrator validation.
+		- Only administrator can create questions.
+		- Greek and English languages supported.
+		- Every "player" is a team consisting of multiple people (i.e allow registration).
+		- Team names must be unique.
+		- Sign up period lasts until start of game.
+		- A game can be in one of 5 states:
+			- Created, i.e the game was created but it has 0 questions.
+			- Ready, a Created game with atleast one question.
+			- Published, a Ready game in which registrations are allowed.
+			- Started, a Published game where registrations have stopped and the game has started.
+			- Finished, a Started game that ended.
+		- 2 question types, multipe choice and input (just integer for now).
+		- Countdown for each question.
+		- Points awarded based on speed relative to other teams.
+		- Wrong answer - x points (x based on question).
+		- No answer 0 points.
+		- Answer result can be seen only after all teams answered or countdown reached 0.
+		- Answer result in the form of a leaderboard.
+		- Game progresses to next question based on administrator input.
+	- Present prototype to client.
+	- Implement functionality based on feedback.
+		
+		
