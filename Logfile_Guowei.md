@@ -7,3 +7,5 @@
 
 # Week 3 (10 Feb-17 Feb):
 > In the meeting, we discussed about the application, specifically on how the data will be stored and retrieved using firebase. But for this sprint, we decided that we will implement all the pages according to the wireframe v1.1, that's simply just views with no functionalities and I was assigned to implement admin, create, and modify pages. Successfully implemented admin and create page with simple UI and added navigation around Home -> Admin -> Create.
+
+# Week 4 (17 Feb-24 Feb):
