@@ -22,7 +22,12 @@ class HomeView extends StatelessWidget {
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.blueGrey[400]),
-                          onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                    return const AdminView();
+                                  }));
+                          },
                           child: const Text("Instructor"),
                         ),
                       ),
@@ -97,10 +102,6 @@ class HomeView extends StatelessWidget {
                             )),
                         ElevatedButton(
                             onPressed: () {
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                return const AdminView();
-                              }));
                             },
                             child: const Text(
                               "Enter",
