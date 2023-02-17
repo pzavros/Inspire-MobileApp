@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:one_for_all/views/admin_view.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -6,7 +7,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.grey[100],
+        backgroundColor: Colors.white,
         body: Column(
           children: <Widget>[
             Container(
@@ -25,14 +26,6 @@ class HomeView extends StatelessWidget {
                           child: const Text("Instructor"),
                         ),
                       ),
-                      Container(
-                          margin: const EdgeInsets.fromLTRB(0, 0, 16, 0),
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.blueGrey[400]),
-                            onPressed: () {},
-                            child: const Text("Refresh"),
-                          )),
                     ],
                   ),
                 )),
@@ -101,11 +94,18 @@ class HomeView extends StatelessWidget {
                                   ),
                                 ),
                               ],
-                            )
-                        ),
+                            )),
                         ElevatedButton(
-                            onPressed: (){},
-                            child: Text("Enter",style: TextStyle(fontSize: 18),))
+                            onPressed: () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return const AdminView();
+                              }));
+                            },
+                            child: const Text(
+                              "Enter",
+                              style: TextStyle(fontSize: 18),
+                            ))
                       ],
                     ),
                   ),
