@@ -12,24 +12,24 @@ class HomeView extends StatelessWidget {
         body: Column(
           children: <Widget>[
             Container(
-                height: 100,
+                height: 90,
                 child: Container(
                   color: Colors.blue,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        margin: const EdgeInsets.fromLTRB(16, 0, 0, 0),
+                        margin: const EdgeInsets.fromLTRB(16, 16, 0, 0),
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.blueGrey[400]),
                           onPressed: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                                  return const AdminView();
-                                }));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const AdminView()));
                           },
-                          child: const Text("Instructor"),
+                          child: const Text("Admin"),
                         ),
                       ),
                     ],
@@ -103,11 +103,11 @@ class HomeView extends StatelessWidget {
                             )),
                         ElevatedButton(
                             onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => RegisterPage()),
-                                );
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => RegisterPage()),
+                              );
                             },
                             child: const Text(
                               "Enter",

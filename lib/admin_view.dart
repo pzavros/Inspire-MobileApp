@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dev_view.dart';
+import 'create_view.dart';
 
 class AdminView extends StatelessWidget {
   const AdminView({Key? key}) : super(key: key);
@@ -11,18 +11,24 @@ class AdminView extends StatelessWidget {
         body: Column(
           children: <Widget>[
             Container(
-                height: 100,
+                height: 90,
                 child: Container(
                   color: Colors.blue,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        margin: const EdgeInsets.fromLTRB(16, 0, 0, 0),
-                        child: const Text("Instructor",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 26,color: Colors.white),),
+                        margin: const EdgeInsets.fromLTRB(16, 16, 0, 0),
+                        child: const Text(
+                          "Admin",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 26,
+                              color: Colors.white),
+                        ),
                       ),
                       Container(
-                          margin: const EdgeInsets.fromLTRB(0, 0, 16, 0),
+                          margin: const EdgeInsets.fromLTRB(0, 16, 16, 0),
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.blueGrey[400]),
@@ -30,7 +36,8 @@ class AdminView extends StatelessWidget {
                               Navigator.pop(context);
                             },
                             child: const Text("Sign out"),
-                          )),
+                          )
+                      ),
                     ],
                   ),
                 )),
@@ -46,13 +53,16 @@ class AdminView extends StatelessWidget {
                         const SizedBox(
                           height: 30,
                         ),
-                        const Text("All Competitions:",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 32),),
-
+                        const Text(
+                          "All Competitions:",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 32),
+                        ),
                         Container(
                             height: 500,
-                            color: Colors.yellow,
                             child: ListView(
-                              padding: const EdgeInsets.symmetric(vertical: 8.0),
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 8.0),
                               children: [
                                 Container(
                                   height: 50,
@@ -95,28 +105,32 @@ class AdminView extends StatelessWidget {
                                   ),
                                 ),
                               ],
-                            )
-                        ),
-
+                            )),
                       ],
                     ),
                   ),
-                )
-            ),
+                )),
             Container(
-              height: 80,
+              height: 60,
               color: Colors.blue,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Flexible(child: TextButton(onPressed: (){
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                          return const DevView();
-                        }));
-                  },child: const Text('Create',style: TextStyle( color: Colors.white,fontSize: 26),),style: TextButton.styleFrom(padding:const EdgeInsets.symmetric(vertical: 1)),)),
-                  Flexible(child: TextButton(onPressed: (){},child: const Text('Modify',style: TextStyle(color: Colors.white,fontSize: 26),),)),
-                  Flexible(child: TextButton(onPressed: (){},child: const Text('Enter',style: TextStyle(color: Colors.white,fontSize: 26),),)),
+                  Flexible(
+                      child: TextButton(
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return const CreateView();
+                      }));
+                    },
+                    style: TextButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 1)),
+                    child: const Text(
+                      'Create',
+                      style: TextStyle(color: Colors.white, fontSize: 26),
+                    ),
+                  )),
                 ],
               ),
             )
