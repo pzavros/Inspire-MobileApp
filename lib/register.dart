@@ -3,7 +3,6 @@ import 'main.dart';
 import 'home_view.dart';
 import 'leaderboard.dart';
 import 'Questions.dart';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:uuid/uuid.dart';
@@ -183,6 +182,22 @@ class _RegisterPageState extends State<RegisterPage> {
                 },
               ),
             ),
+            Container(color: Colors.yellowAccent,
+              child: Center(
+                child: MaterialButton(onPressed: ()async{
+                  if (myController.text.isNotEmpty) {
+                    // popupTitle = "Success";
+                    // popupMsg = "New data has been added to the database.";
+                    Map<String,String> players = {
+                      'name':myController.text,
+
+                    };
+                    dbRef.push().set(players);
+                  }
+
+                }),
+              ),
+            )
           ],
         ),
       ),
