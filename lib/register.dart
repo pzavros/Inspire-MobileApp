@@ -1,28 +1,17 @@
 import 'package:flutter/material.dart';
+import 'main.dart';
+import 'home_view.dart';
 import 'leaderboard.dart';
 import 'Questions.dart';
-
-import 'home_view.dart';
-
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(scaffoldBackgroundColor: Colors.blueGrey),
-      home: const RegisterPage(),
-    );
-  }
-}
+import 'Message.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:uuid/uuid.dart';
 
 class RegisterPage extends StatefulWidget {
-  const RegisterPage({Key? key}) : super(key: key);
+  RegisterPage({Key? key}) : super(key: key);
+
+  // final FirebaseApp app;
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -31,13 +20,37 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   final myController = TextEditingController();
 
-  int score = 4;
+  // late List<Message> _messages = [];
 
-  @override
-  void dispose() {
-    // Clean up the controller when the widget is disposed.
-    myController.dispose();
-    super.dispose();
+  //final referenceDatabase = FirebaseDatabase.instance;
+
+  // void initState() async {
+  //   super.initState();
+  //   await ref.set({
+  //     "name": "John",
+  //     "age": 18,
+  //     "address": {
+  //       "line1": "100 Mountain View"
+  //     }
+  //   });
+  //
+  // }
+
+  // @override
+  // void dispose() {
+  //   // Clean up the controller when the widget is disposed.
+  //   _textEditingController.dispose();
+  //   super.dispose();
+  // }
+
+  late DatabaseReference dbRef;
+
+  var teamName = "Team name";
+
+  void initState() {
+    super.initState();
+    dbRef = FirebaseDatabase.instance.ref().child('Players');
+
   }
 
   @override
@@ -54,8 +67,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) => HomeView()),
+                    MaterialPageRoute(builder: (context) => HomeView()),
                   );
                 },
                 child: const Icon(Icons.developer_mode),
@@ -68,7 +80,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>  LeaderBoard(score:score)),
+                        builder: (context) => LeaderBoard(score: score,name:teamName)),
                   );
                 },
                 child: const Icon(Icons.leaderboard_rounded),
@@ -122,13 +134,53 @@ class _RegisterPageState extends State<RegisterPage> {
                     minimumSize: const Size(150, 50),
                     backgroundColor: Colors.white),
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const Questions()),
-                  );
+
+                  Map<String, String> Player = {'name': myController.text ,'uuid': v1};
+                  var name = myController.text;
+
+                  // dbRef.set({
+                  //   "name": name,
+                  //   "score": 0,
+                  // });
+
+                  dbRef.push().set(Player);
+
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //       builder: (context) => const Questions()),
+                  // );
+
+                  //debugPrint(v1 + "  //////////////////");
+                  //dbRef.push().set(Players);
                 },
                 child: const Icon(Icons.navigate_next),
+              ),
+            ),
+            Flexible(
+              child: StreamBuilder(
+                stream: dbRef.child('Players').orderByKey().onValue,
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  if (!snapshot.hasData) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else{
+
+                    //final snapshot = dbRef.child('Players/00bef620-b03a-11ed-8e8a-9fbb8a9b4cce').get();
+
+
+                    //onValue
+                    dbRef.onChildAdded.listen((DatabaseEvent event) {
+                      final data = event.snapshot.value;
+                      //  var something = data as Map;
+                      // debugPrint(something.toString());
+                      print(data);
+                      teamName = data.toString();
+
+                    });
+                    return Text("");
+
+                  }
+                },
               ),
             ),
           ],
@@ -137,7 +189,6 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 }
-
 
 /*FloatingActionButton(
   // When the user presses the button, show an alert dialog containing

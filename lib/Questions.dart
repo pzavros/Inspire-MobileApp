@@ -53,7 +53,7 @@ class _QuestionsState extends State<Questions> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => LeaderBoard(score: score),
+                  builder: (context) => LeaderBoard(score: score,name:"test"),
                 ),
               );
             },
@@ -129,61 +129,61 @@ class _QuestionsState extends State<Questions> {
                 children: <Widget>[
                   Expanded(
                       child: ElevatedButton(
-                    onPressed: () {
-                      if (quiz.choices[questionNumber][0] ==
-                          quiz.correctAnswers[questionNumber]) {
-                        debugPrint("Correct");
-                        score++;
-                      } else {
-                        debugPrint("Wrong");
-                      }
+                        onPressed: () {
+                          if (quiz.choices[questionNumber][0] ==
+                              quiz.correctAnswers[questionNumber]) {
+                            debugPrint("Correct");
+                            score++;
+                          } else {
+                            debugPrint("Wrong");
+                          }
 
-                      updateQuestion();
-                    },
-                    child: Text(quiz.choices[questionNumber][0]),
-                  )),
+                          updateQuestion();
+                        },
+                        child: Text(quiz.choices[questionNumber][0]),
+                      )),
                   Expanded(
                       child: ElevatedButton(
-                    onPressed: () {
-                      if (quiz.choices[questionNumber][1] ==
-                          quiz.correctAnswers[questionNumber]) {
-                        debugPrint("Correct");
-                        score++;
-                      } else {
-                        debugPrint("Wrong");
-                      }
-                      updateQuestion();
-                    },
-                    child: Text(quiz.choices[questionNumber][1]),
-                  )),
+                        onPressed: () {
+                          if (quiz.choices[questionNumber][1] ==
+                              quiz.correctAnswers[questionNumber]) {
+                            debugPrint("Correct");
+                            score++;
+                          } else {
+                            debugPrint("Wrong");
+                          }
+                          updateQuestion();
+                        },
+                        child: Text(quiz.choices[questionNumber][1]),
+                      )),
                   Expanded(
                       child: ElevatedButton(
-                    onPressed: () {
-                      if (quiz.choices[questionNumber][2] ==
-                          quiz.correctAnswers[questionNumber]) {
-                        debugPrint("Correct");
-                        score++;
-                      } else {
-                        debugPrint("Wrong");
-                      }
-                      updateQuestion();
-                    },
-                    child: Text(quiz.choices[questionNumber][2]),
-                  )),
+                        onPressed: () {
+                          if (quiz.choices[questionNumber][2] ==
+                              quiz.correctAnswers[questionNumber]) {
+                            debugPrint("Correct");
+                            score++;
+                          } else {
+                            debugPrint("Wrong");
+                          }
+                          updateQuestion();
+                        },
+                        child: Text(quiz.choices[questionNumber][2]),
+                      )),
                   Expanded(
                       child: ElevatedButton(
-                    onPressed: () {
-                      if (quiz.choices[questionNumber][3] ==
-                          quiz.correctAnswers[questionNumber]) {
-                        debugPrint("Correct");
-                        score++;
-                      } else {
-                        debugPrint("Wrong");
-                      }
-                      updateQuestion();
-                    },
-                    child: Text(quiz.choices[questionNumber][3]),
-                  )),
+                        onPressed: () {
+                          if (quiz.choices[questionNumber][3] ==
+                              quiz.correctAnswers[questionNumber]) {
+                            debugPrint("Correct");
+                            score++;
+                          } else {
+                            debugPrint("Wrong");
+                          }
+                          updateQuestion();
+                        },
+                        child: Text(quiz.choices[questionNumber][3]),
+                      )),
                 ]),
           ),
           const Padding(padding: EdgeInsets.all(15.0)),
@@ -207,7 +207,7 @@ class _QuestionsState extends State<Questions> {
     setState(() {
       if (questionNumber == quiz.questions.length - 1) {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => LeaderBoard(score: score)));
+            MaterialPageRoute(builder: (context) => LeaderBoard(score: score,name:"test")));
       } else {
         questionNumber++;
         questionCounter++;
