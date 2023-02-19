@@ -29,10 +29,7 @@ class _CreateViewState extends State<CreateView> {
             appBar: AppBar(
                 title: const Text(
               "New Competition",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 26,
-              ),
+              style: TextStyle(fontSize: 26,),
             )),
             backgroundColor: Colors.white,
             body: Column(
@@ -149,7 +146,11 @@ class _CreateViewState extends State<CreateView> {
                       if (nameController.text.isNotEmpty) {
                         popupTitle = "Success";
                         popupMsg = "New data has been added to the database.";
-                        dbRef.push().set(nameController.text);
+                        Map<String,String> competition = {
+                          'name':nameController.text,
+
+                        };
+                        dbRef.push().set(competition);
                       }
                       await showDialog(
                           context: context,
