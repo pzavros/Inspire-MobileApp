@@ -22,6 +22,10 @@ collection
 2.12
 file:///C:/Users/Guowei/AppData/Local/Pub/Cache/hosted/pub.dev/collection-1.17.0/
 file:///C:/Users/Guowei/AppData/Local/Pub/Cache/hosted/pub.dev/collection-1.17.0/lib/
+crypto
+2.14
+file:///C:/Users/Guowei/AppData/Local/Pub/Cache/hosted/pub.dev/crypto-3.0.2/
+file:///C:/Users/Guowei/AppData/Local/Pub/Cache/hosted/pub.dev/crypto-3.0.2/lib/
 cupertino_icons
 2.12
 file:///C:/Users/Guowei/AppData/Local/Pub/Cache/hosted/pub.dev/cupertino_icons-1.0.5/
@@ -110,6 +114,14 @@ test_api
 2.18
 file:///C:/Users/Guowei/AppData/Local/Pub/Cache/hosted/pub.dev/test_api-0.4.16/
 file:///C:/Users/Guowei/AppData/Local/Pub/Cache/hosted/pub.dev/test_api-0.4.16/lib/
+typed_data
+2.12
+file:///C:/Users/Guowei/AppData/Local/Pub/Cache/hosted/pub.dev/typed_data-1.3.1/
+file:///C:/Users/Guowei/AppData/Local/Pub/Cache/hosted/pub.dev/typed_data-1.3.1/lib/
+uuid
+2.12
+file:///C:/Users/Guowei/AppData/Local/Pub/Cache/hosted/pub.dev/uuid-3.0.7/
+file:///C:/Users/Guowei/AppData/Local/Pub/Cache/hosted/pub.dev/uuid-3.0.7/lib/
 vector_math
 2.14
 file:///C:/Users/Guowei/AppData/Local/Pub/Cache/hosted/pub.dev/vector_math-2.1.4/

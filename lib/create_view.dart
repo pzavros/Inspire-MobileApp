@@ -170,7 +170,6 @@ class _CreateViewState extends State<CreateView> {
                                       Navigator.pop(context);
                                     }
                                   },
-
                                 )
                               ],
                             );

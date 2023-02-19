@@ -13,6 +13,7 @@ class _AdminViewState extends State<AdminView> {
   Query dbRef = FirebaseDatabase.instance.ref().child('Competitions');
   DatabaseReference reference = FirebaseDatabase.instance.ref().child('Competitions');
 
+
   //@override
   // Widget build(BuildContext context) {
   //   return Scaffold(
@@ -148,7 +149,6 @@ class _AdminViewState extends State<AdminView> {
   //       ));
   // }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -160,7 +160,7 @@ class _AdminViewState extends State<AdminView> {
                 fontSize: 26,
               )),
         ),
-        body: null,
+        body: Text(""),
        bottomNavigationBar: BottomAppBar(
           color: Colors.blue,
           child: TextButton(
