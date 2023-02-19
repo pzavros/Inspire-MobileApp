@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "82361038094",
+    "firebase_url": "https://dilemmaregister-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "dilemmaregister",
+    "storage_bucket": "dilemmaregister.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:82361038094:android:2e4fb028156446ba7d935f",
+        "android_client_info": {
+          "package_name": "com.example.dilemma"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "82361038094-ijd4lv5ph4ai5vphbup34l384vlva1vv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHXqdoZsgcG_2M6NvFoFLtx9x_NbH0SsQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "82361038094-ijd4lv5ph4ai5vphbup34l384vlva1vv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
