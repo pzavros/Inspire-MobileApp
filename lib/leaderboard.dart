@@ -21,7 +21,6 @@ class _LeaderBoardState extends State<LeaderBoard> {
 
   //var something = "";
 
-  late List<Message> _messages = [];
   late DatabaseReference _db;
 
   void initState() {
