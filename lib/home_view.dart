@@ -23,6 +23,7 @@ class _HomeViewState extends State<HomeView> {
       height: 90,
       color: Colors.grey[300],
       child: ListView(
+        physics: const NeverScrollableScrollPhysics(),
         children: [
           ListTile(
             title: Text(
