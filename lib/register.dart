@@ -49,7 +49,6 @@ class _RegisterPageState extends State<RegisterPage> {
   void initState() {
     super.initState();
     dbRef = FirebaseDatabase.instance.ref().child('Players');
-
   }
 
   @override
@@ -79,7 +78,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => LeaderBoard(score: score,name:teamName)),
+                        builder: (context) =>
+                            LeaderBoard(score: score, name: teamName)),
                   );
                 },
                 child: const Icon(Icons.leaderboard_rounded),
@@ -132,72 +132,81 @@ class _RegisterPageState extends State<RegisterPage> {
                 style: OutlinedButton.styleFrom(
                     minimumSize: const Size(150, 50),
                     backgroundColor: Colors.white),
-                onPressed: () {
-
-                  Map<String, String> Player = {'name': myController.text ,'uuid': v1};
-                  var name = myController.text;
-
-                  // dbRef.set({
-                  //   "name": name,
-                  //   "score": 0,
-                  // });
-
-                  dbRef.push().set(Player);
-
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //       builder: (context) => const Questions()),
-                  // );
-
-                  //debugPrint(v1 + "  //////////////////");
-                  //dbRef.push().set(Players);
-                },
-                child: const Icon(Icons.navigate_next),
-              ),
-            ),
-            Flexible(
-              child: StreamBuilder(
-                stream: dbRef.child('Players').orderByKey().onValue,
-                builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  if (!snapshot.hasData) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else{
-
-                    //final snapshot = dbRef.child('Players/00bef620-b03a-11ed-8e8a-9fbb8a9b4cce').get();
-
-
-                    //onValue
-                    dbRef.onChildAdded.listen((DatabaseEvent event) {
-                      final data = event.snapshot.value;
-                      //  var something = data as Map;
-                      // debugPrint(something.toString());
-                      print(data);
-                      teamName = data.toString();
-
-                    });
-                    return Text("");
-
-                  }
-                },
-              ),
-            ),
-            Container(color: Colors.yellowAccent,
-              child: Center(
-                child: MaterialButton(onPressed: ()async{
+                onPressed: () async {
                   if (myController.text.isNotEmpty) {
                     // popupTitle = "Success";
                     // popupMsg = "New data has been added to the database.";
-                    Map<String,String> players = {
-                      'name':myController.text,
-
+                    Map<String, String> players = {
+                      'name': myController.text,
                     };
                     dbRef.push().set(players);
                   }
+                },
+                child: const Icon(Icons.navigate_next),
 
-                }),
+
+                // Map<String, String> Player = {'name': myController.text ,'uuid': v1};
+                // var name = myController.text;
+                //
+                // // dbRef.set({
+                // //   "name": name,
+                // //   "score": 0,
+                // // });
+                //
+                // dbRef.push().set(Player);
+
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //       builder: (context) => const Questions()),
+                // );
+
+                //debugPrint(v1 + "  //////////////////");
+                //dbRef.push().set(Players);
+
               ),
-            )
+            ),
+            // Flexible(
+            //   child: StreamBuilder(
+            //     stream: dbRef.child('Players').orderByKey().onValue,
+            //     builder: (BuildContext context, AsyncSnapshot snapshot) {
+            //       if (!snapshot.hasData) {
+            //         return const Center(child: CircularProgressIndicator());
+            //       } else{
+            //
+            //         //final snapshot = dbRef.child('Players/00bef620-b03a-11ed-8e8a-9fbb8a9b4cce').get();
+            //
+            //
+            //         //onValue
+            //         dbRef.onChildAdded.listen((DatabaseEvent event) {
+            //           final data = event.snapshot.value;
+            //           //  var something = data as Map;
+            //           // debugPrint(something.toString());
+            //           print(data);
+            //           teamName = data.toString();
+            //
+            //         });
+            //         return Text("");
+            //
+            //       }
+            //     },
+            //   ),
+            // ),
+            // Container(
+            //   color: Colors.yellowAccent,
+            //   child: Center(
+            //     child: MaterialButton(onPressed: () async {
+            //       if (myController.text.isNotEmpty) {
+            //         // popupTitle = "Success";
+            //         // popupMsg = "New data has been added to the database.";
+            //         Map<String, String> players = {
+            //           'name': myController.text,
+            //         };
+            //         dbRef.push().set(players);
+            //       }
+            //     }),
+            //   ),
+            // )
           ],
         ),
       ),

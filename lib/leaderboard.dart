@@ -11,14 +11,13 @@ import 'package:uuid/uuid.dart';
 class LeaderBoard extends StatefulWidget {
   final int score;
   final String name;
-  const LeaderBoard({super.key,required this.score,required this.name});
+  const LeaderBoard({super.key, required this.score, required this.name});
 
   @override
   State<LeaderBoard> createState() => _LeaderBoardState();
 }
 
 class _LeaderBoardState extends State<LeaderBoard> {
-
   //var something = "";
 
   late DatabaseReference dbRef;
@@ -31,6 +30,7 @@ class _LeaderBoardState extends State<LeaderBoard> {
     // FirebaseDatabase.instance.ref('Players');
 
     dbRef = FirebaseDatabase.instance.ref("Players/");
+
     // _db.
 
     // _db.onValue.listen((DatabaseEvent event) {
@@ -40,7 +40,9 @@ class _LeaderBoardState extends State<LeaderBoard> {
     // });
   }
 
-  Widget listItem({required Map players}) {
+  //int index = 1;
+
+  Widget listItem({required Map players,required index}) {
     return Container(
       margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
       padding: const EdgeInsets.all(10),
@@ -50,7 +52,7 @@ class _LeaderBoardState extends State<LeaderBoard> {
         children: [
           ListTile(
             title: Text(
-              players ['name'],
+              players['name'],
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
             ),
             //   subtitle:Text("status: ${competition ['status']}",
@@ -58,6 +60,23 @@ class _LeaderBoardState extends State<LeaderBoard> {
             // ),
             onTap: () {},
             onLongPress: () {},
+            leading: Text(
+              '${index+1}',
+              style: const TextStyle(
+                fontSize: 30,
+                letterSpacing: 5,
+                color: Colors.yellowAccent,
+              ),
+            ),
+            trailing: Text(
+              "${widget.score} pts",
+              style: TextStyle(
+                fontSize: 20,
+                letterSpacing: 1,
+                fontWeight: FontWeight.bold,
+                color: Colors.indigo,
+              ),
+            ),
           )
         ],
       ),
@@ -79,7 +98,7 @@ class _LeaderBoardState extends State<LeaderBoard> {
               Animation<double> animation, int index) {
             Map players = snapshot.value as Map;
             players['key'] = snapshot.key;
-            return listItem(players: players);
+            return listItem(players: players,index: index);
           },
         ),
       ),
