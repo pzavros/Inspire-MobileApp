@@ -19,7 +19,7 @@ class _AdminViewState extends State<AdminView> {
       margin: const EdgeInsets.fromLTRB(10,10,10,0),
       padding: const EdgeInsets.all(10),
       height: 90,
-      color: Colors.grey[400],
+      color: Colors.grey[300],
       child: ListView(
         children: [
           ListTile(
@@ -30,8 +30,12 @@ class _AdminViewState extends State<AdminView> {
           //   subtitle:Text("status: ${competition ['status']}",
           //       style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500,color: Colors.white),
           // ),
-            onTap: (){},
-            onLongPress: (){},
+            onTap: (){
+              //TODO enter to the competition
+            },
+            onLongPress: (){
+              //TODO modify the competition
+            },
           )],
       ),
     );
@@ -60,7 +64,6 @@ class _AdminViewState extends State<AdminView> {
           child: TextButton(
             child: const Text("Create",style: TextStyle(color: Colors.white, fontSize: 26)),
             onPressed: (){
-              //TODO
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) {
                     return const CreateView();
