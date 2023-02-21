@@ -141,6 +141,11 @@ class _RegisterPageState extends State<RegisterPage> {
                     };
                     dbRef.push().set(players);
                   }
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const Questions()),
+                  );
                 },
                 child: const Icon(Icons.navigate_next),
 

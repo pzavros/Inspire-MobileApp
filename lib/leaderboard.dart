@@ -49,6 +49,7 @@ class _LeaderBoardState extends State<LeaderBoard> {
       height: 90,
       color: Colors.grey[400],
       child: ListView(
+        physics: const NeverScrollableScrollPhysics(),
         children: [
           ListTile(
             title: Text(
