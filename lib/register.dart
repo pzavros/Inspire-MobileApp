@@ -49,6 +49,8 @@ class _RegisterPageState extends State<RegisterPage> {
 
   var teamName = "Team name";
 
+  var state = true;
+
   void initState() {
     super.initState();
     dbRef = FirebaseDatabase.instance.ref().child('Players');
@@ -94,114 +96,131 @@ class _RegisterPageState extends State<RegisterPage> {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Stack(children: [
-              Text(
-                'Enter team name',
-                style: TextStyle(
-                  fontSize: 35,
-                  letterSpacing: 5,
-                  fontWeight: FontWeight.bold,
-                  foreground: Paint()
-                    ..style = PaintingStyle.stroke
-                    ..strokeWidth = 10
-                    ..color = Colors.indigo,
+            Visibility(
+              visible: state,
+              child: Stack(children: [
+                Text(
+                  'Enter team name',
+                  style: TextStyle(
+                    fontSize: 35,
+                    letterSpacing: 5,
+                    fontWeight: FontWeight.bold,
+                    foreground: Paint()
+                      ..style = PaintingStyle.stroke
+                      ..strokeWidth = 10
+                      ..color = Colors.indigo,
+                  ),
                 ),
-              ),
-              // The text inside
-              const Text(
-                'Enter team name',
-                style: TextStyle(
-                  fontSize: 35,
-                  letterSpacing: 5,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                // The text inside
+                const Text(
+                  'Enter team name',
+                  style: TextStyle(
+                    fontSize: 35,
+                    letterSpacing: 5,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                 ),
-              ),
-            ]),
-            Padding(
-              padding: const EdgeInsets.only(
-                  bottom: 10.0, top: 100.0, left: 20.0, right: 20.0),
-              child: TextField(
-                controller: myController,
-                decoration: const InputDecoration(
-                  hintText: 'Name',
-                  fillColor: Colors.white,
-                  filled: true,
+              ]),
+            ),
+
+            Visibility(
+              visible: state,
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    bottom: 10.0, top: 100.0, left: 20.0, right: 20.0),
+                child: TextField(
+                  controller: myController,
+                  decoration: const InputDecoration(
+                    hintText: 'Name',
+                    fillColor: Colors.white,
+                    filled: true,
+                  ),
                 ),
               ),
             ),
-            Center(
-              child: OutlinedButton(
-                style: OutlinedButton.styleFrom(
-                    minimumSize: const Size(150, 50),
-                    backgroundColor: Colors.white),
-                onPressed: () async {
-                  if (myController.text.isNotEmpty) {
-                    popupTitle = "Registration Successful!";
-                    popupMsg = "";
-                    Map<String, String> players = {
-                      'name': myController.text,
-                      'uuid': v1,
-                    };
-                    dbRef.push().set(players);
-                  }
+
+            Visibility(
+              visible: state,
+              child: Center(
+                child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                      minimumSize: const Size(150, 50),
+                      backgroundColor: Colors.white),
+                  onPressed: () async {
+                    if (myController.text.isNotEmpty) {
+                      popupTitle = "Registration Successful!";
+                      popupMsg = "";
+                      Map<String, String> players = {
+                        'name': myController.text,
+                        'uuid': v1,
+                      };
+                      dbRef.push().set(players);
+                    }
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //       builder: (context) => const Questions()),
+                    // );
+
+                    setState(() {
+                      if (popupTitle == "Registration Successful!") {
+                        state = !state;
+                      }
+                    });
+                    await showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text(popupTitle),
+                            content: Text(popupMsg),
+                            actions: [
+                              TextButton(
+                                child: const Text('OK'),
+                                onPressed: () {
+                                  if (popupTitle ==
+                                      "Registration Successful!") {
+                                    FocusManager.instance.primaryFocus
+                                        ?.unfocus();
+                                    Navigator.pop(context);
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const Questions()),
+                                    );
+                                  } else {
+                                    FocusManager.instance.primaryFocus
+                                        ?.unfocus();
+                                    Navigator.pop(context);
+                                  }
+                                },
+                              )
+                            ],
+                          );
+                        });
+                  },
+                  child: const Icon(Icons.navigate_next),
+
+                  // Map<String, String> Player = {'name': myController.text ,'uuid': v1};
+                  // var name = myController.text;
+                  //
+                  // // dbRef.set({
+                  // //   "name": name,
+                  // //   "score": 0,
+                  // // });
+                  //
+                  // dbRef.push().set(Player);
+
                   // Navigator.push(
                   //   context,
                   //   MaterialPageRoute(
                   //       builder: (context) => const Questions()),
                   // );
 
-                  await showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: Text(popupTitle),
-                          content: Text(popupMsg),
-                          actions: [
-                            TextButton(
-                              child: const Text('OK'),
-                              onPressed: () {
-                                if (popupTitle == "Registration Successful!") {
-                                  FocusManager.instance.primaryFocus
-                                      ?.unfocus();
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const Questions()),
-                                  );
-                                } else {
-                                  FocusManager.instance.primaryFocus
-                                      ?.unfocus();
-                                  Navigator.pop(context);
-                                }
-                              },
-                            )
-                          ],
-                        );
-                      });
-                },
-                child: const Icon(Icons.navigate_next),
-
-
-                // Map<String, String> Player = {'name': myController.text ,'uuid': v1};
-                // var name = myController.text;
-                //
-                // // dbRef.set({
-                // //   "name": name,
-                // //   "score": 0,
-                // // });
-                //
-                // dbRef.push().set(Player);
-
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //       builder: (context) => const Questions()),
-                // );
-
-                //debugPrint(v1 + "  //////////////////");
-                //dbRef.push().set(Players);
-
+                  //debugPrint(v1 + "  //////////////////");
+                  //dbRef.push().set(Players);
+                ),
               ),
             ),
             // Flexible(
@@ -245,6 +264,39 @@ class _RegisterPageState extends State<RegisterPage> {
             //     }),
             //   ),
             // )
+
+            Visibility(
+              visible: !state,
+              child: Center(
+                  child: OutlinedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Questions()),
+                  );
+                },
+                child: const Text("Continue"),
+                style: OutlinedButton.styleFrom(
+                    minimumSize: const Size(150, 50),
+                    backgroundColor: Colors.white),
+              )),
+            ),
+            Visibility(
+              visible: !state,
+              child: Center(
+                  child: OutlinedButton(
+                onPressed: () {
+                  setState(() {
+                    state = !state;
+                  });
+                },
+                child: const Icon(Icons.restart_alt),
+                style: OutlinedButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    minimumSize: const Size(50, 50),
+                    backgroundColor: Colors.redAccent),
+              )),
+            )
           ],
         ),
       ),
