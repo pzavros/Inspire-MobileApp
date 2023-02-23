@@ -21,6 +21,7 @@ class _LeaderBoardState extends State<LeaderBoard> {
   //var something = "";
 
   late DatabaseReference dbRef;
+  late String status = "";
 
   void initState() {
     super.initState();

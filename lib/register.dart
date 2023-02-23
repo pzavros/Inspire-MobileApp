@@ -44,6 +44,9 @@ class _RegisterPageState extends State<RegisterPage> {
 
   late DatabaseReference dbRef;
 
+  late String popupTitle = "Fail";
+  late String popupMsg = "The name cannot be empty or name already exist.";
+
   var teamName = "Team name";
 
   void initState() {
@@ -134,18 +137,48 @@ class _RegisterPageState extends State<RegisterPage> {
                     backgroundColor: Colors.white),
                 onPressed: () async {
                   if (myController.text.isNotEmpty) {
-                    // popupTitle = "Success";
-                    // popupMsg = "New data has been added to the database.";
+                    popupTitle = "Registration Successful!";
+                    popupMsg = "";
                     Map<String, String> players = {
                       'name': myController.text,
+                      'uuid': v1,
                     };
                     dbRef.push().set(players);
                   }
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const Questions()),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //       builder: (context) => const Questions()),
+                  // );
+
+                  await showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text(popupTitle),
+                          content: Text(popupMsg),
+                          actions: [
+                            TextButton(
+                              child: const Text('OK'),
+                              onPressed: () {
+                                if (popupTitle == "Registration Successful!") {
+                                  FocusManager.instance.primaryFocus
+                                      ?.unfocus();
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => const Questions()),
+                                  );
+                                } else {
+                                  FocusManager.instance.primaryFocus
+                                      ?.unfocus();
+                                  Navigator.pop(context);
+                                }
+                              },
+                            )
+                          ],
+                        );
+                      });
                 },
                 child: const Icon(Icons.navigate_next),
 
