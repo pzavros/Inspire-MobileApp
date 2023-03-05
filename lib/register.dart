@@ -154,13 +154,11 @@ class _RegisterPageState extends State<RegisterPage> {
                       popupTitle = "Registration Successful!";
                       popupMsg = "";
                       Map<String, String> players = {
-                        //error: name are override
-                        //TODO change the name value to obj or array of strings
                         'name': myController.text,
-
+                        'uuid':"",
                       };
                       //debugPrint("snapshot key-------------------> ${widget.competitionId}");
-                      dbRef.update(players);
+                      dbRef.push().set(players);
                     }
                     // Navigator.push(
                     //   context,
