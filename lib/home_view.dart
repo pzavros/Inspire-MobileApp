@@ -13,8 +13,7 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   Query dbRef = FirebaseDatabase.instance.ref().child('Competitions');
-  DatabaseReference reference =
-      FirebaseDatabase.instance.ref().child('Competitions');
+  DatabaseReference reference = FirebaseDatabase.instance.ref().child('Competitions');
 
   Widget myWidget({required Map competition}){
     return Container(
@@ -28,18 +27,14 @@ class _HomeViewState extends State<HomeView> {
           ListTile(
             title: Text(
               competition['name'],
-              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
-            ),
-            subtitle:Text("status: ${competition ['status']}",
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500,color: Colors.lightGreen),
-            ),
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w500),),
+            subtitle:Text("status: ${competition ['key']}",
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500,color: Colors.lightGreen),),
             trailing: const Icon(Icons.arrow_forward_ios),
+            //enter to the competition
             onTap: () {
-              //enter to the competition
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => RegisterPage()),
-              );
+              //debugPrint("------------------------------${competition ['key']}");
+              Navigator.push(context, MaterialPageRoute(builder: (context) =>  RegisterPage(competitionId:competition ['key'])));
             },
           )
         ],
@@ -74,14 +69,14 @@ class _HomeViewState extends State<HomeView> {
         height: double.infinity,
         child: FirebaseAnimatedList(
           query: dbRef,
-          itemBuilder: (BuildContext context, DataSnapshot snapshot, Animation<double> animation, int index) {
+          itemBuilder: (BuildContext context, DataSnapshot snapshot, Animation<double> animation, int index) { // itemBuilder must return something
             Map competition = snapshot.value as Map;
             competition['key'] = snapshot.key;
             // return competitions that are ready
-            if(competition['status']=="ready") {
+            //if(competition['status']=="ready") {
               return myWidget(competition:competition);
-            }
-            return Container();
+            //}
+           // return Container();
           },
         ),
       ),

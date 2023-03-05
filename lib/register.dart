@@ -7,9 +7,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:uuid/uuid.dart';
 
-class RegisterPage extends StatefulWidget {
-  RegisterPage({Key? key}) : super(key: key);
 
+class RegisterPage extends StatefulWidget {
+   const RegisterPage({required this.competitionId,Key? key}) : super(key: key);
+   final String competitionId;
   // final FirebaseApp app;
 
   @override
@@ -51,9 +52,10 @@ class _RegisterPageState extends State<RegisterPage> {
 
   var state = true;
 
+
   void initState() {
     super.initState();
-    dbRef = FirebaseDatabase.instance.ref().child('Players');
+    dbRef = FirebaseDatabase.instance.ref().child("Competitions/${widget.competitionId}/Players");
   }
 
   @override
@@ -153,9 +155,10 @@ class _RegisterPageState extends State<RegisterPage> {
                       popupMsg = "";
                       Map<String, String> players = {
                         'name': myController.text,
-                        'uuid': v1,
+
                       };
-                      dbRef.push().set(players);
+                      //debugPrint("snapshot key-------------------> ${widget.competitionId}");
+                      dbRef.update(players);
                     }
                     // Navigator.push(
                     //   context,

@@ -15,6 +15,7 @@ class _AdminViewState extends State<AdminView> {
   DatabaseReference reference = FirebaseDatabase.instance.ref().child('Competitions');
 
   Widget listItem({required Map competition}) {
+    //debugPrint("Competition OBJ----> $competition");
     return Container(
       margin: const EdgeInsets.fromLTRB(10,10,10,0),
       padding: const EdgeInsets.all(10),
@@ -55,7 +56,8 @@ class _AdminViewState extends State<AdminView> {
               query: dbRef,
               itemBuilder: (BuildContext context, DataSnapshot snapshot, Animation<double> animation, int index) {
                 Map competition=snapshot.value as Map;
-                competition['key']=snapshot.key;
+                competition['key']=snapshot.key;// will give the generated unique id a name "key"
+                //debugPrint("snapshot key-------------------> ${snapshot.key}");
                 return listItem(competition: competition);
               },
             ) ,

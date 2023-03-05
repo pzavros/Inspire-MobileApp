@@ -9,7 +9,6 @@ String v1 = "";
 
 Future <void> main () async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await Firebase.initializeApp();
 
   // check that a UUID exists. if not create one.
@@ -17,14 +16,15 @@ Future <void> main () async {
   final prefs = await SharedPreferences.getInstance();
   if(prefs.containsKey('uuid')) {
     v1 = prefs.getString('uuid')!;
-  } else {
+  }
+  // 2. if it does not exist, create and write to Prefs
+  else {
     var uuid = const Uuid();
     v1 = uuid.v1();
     prefs.setString('uuid', v1);
   }
-  debugPrint("---> $v1 <-----");
+  debugPrint("----> $v1 <-----");
 
-  // 2. if it does not exist, create and write to Prefs
   runApp(const MyApp());
 }
 
