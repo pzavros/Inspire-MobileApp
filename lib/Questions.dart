@@ -25,7 +25,11 @@ class Quiz {
 }
 
 class Questions extends StatefulWidget {
-  const Questions({Key? key}) : super(key: key);
+
+  //needed to keep track of competitions
+  final String competitionId;
+
+  const Questions({Key? key, required this.competitionId}) : super(key: key);
 
   @override
   State<Questions> createState() => _QuestionsState();
@@ -53,7 +57,7 @@ class _QuestionsState extends State<Questions> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => LeaderBoard(score: score,name:"test"),
+                  builder: (context) => LeaderBoard(score: score,name:"test",competitionId: widget.competitionId,),
                 ),
               );
             },
@@ -207,7 +211,7 @@ class _QuestionsState extends State<Questions> {
     setState(() {
       if (questionNumber == quiz.questions.length - 1) {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => LeaderBoard(score: score,name:"test")));
+            MaterialPageRoute(builder: (context) => LeaderBoard(score: score,name:"test",competitionId: widget.competitionId,)));
       } else {
         questionNumber++;
         questionCounter++;
@@ -218,7 +222,7 @@ class _QuestionsState extends State<Questions> {
   void resetQuiz() {
     setState(() {
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => const Questions()));
+          context, MaterialPageRoute(builder: (context) =>  Questions(competitionId: widget.competitionId,)));
       score = 0;
       questionNumber = 0;
     });

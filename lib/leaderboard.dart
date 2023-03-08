@@ -11,7 +11,8 @@ import 'package:uuid/uuid.dart';
 class LeaderBoard extends StatefulWidget {
   final int score;
   final String name;
-  const LeaderBoard({super.key, required this.score, required this.name});
+  final String competitionId;
+  const LeaderBoard({super.key, required this.score, required this.name, required this.competitionId});
 
   @override
   State<LeaderBoard> createState() => _LeaderBoardState();
@@ -23,6 +24,7 @@ class _LeaderBoardState extends State<LeaderBoard> {
   late DatabaseReference dbRef;
   late String status = "";
 
+  @override
   void initState() {
     super.initState();
 
@@ -30,7 +32,7 @@ class _LeaderBoardState extends State<LeaderBoard> {
     //
     // FirebaseDatabase.instance.ref('Players');
 
-    dbRef = FirebaseDatabase.instance.ref("Players/");
+    dbRef = FirebaseDatabase.instance.ref("Competitions/${widget.competitionId}/Players/");
 
     // _db.
 
@@ -72,7 +74,7 @@ class _LeaderBoardState extends State<LeaderBoard> {
             ),
             trailing: Text(
               "${widget.score} pts",
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 20,
                 letterSpacing: 1,
                 fontWeight: FontWeight.bold,
@@ -92,12 +94,15 @@ class _LeaderBoardState extends State<LeaderBoard> {
         title: const Text('Leaderboard'),
         backgroundColor: Colors.indigo,
       ),
-      body: Container(
+      body: SizedBox(
         height: double.infinity,
         child: FirebaseAnimatedList(
           query: dbRef,
           itemBuilder: (BuildContext context, DataSnapshot snapshot,
               Animation<double> animation, int index) {
+
+            print("-------------->${snapshot.value}<-------------");
+
             Map players = snapshot.value as Map;
             players['key'] = snapshot.key;
             return listItem(players: players,index: index);

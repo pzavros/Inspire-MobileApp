@@ -3,9 +3,9 @@ import 'main.dart';
 import 'home_view.dart';
 import 'leaderboard.dart';
 import 'Questions.dart';
-import 'package:firebase_core/firebase_core.dart';
+
 import 'package:firebase_database/firebase_database.dart';
-import 'package:uuid/uuid.dart';
+
 
 
 class RegisterPage extends StatefulWidget {
@@ -53,6 +53,7 @@ class _RegisterPageState extends State<RegisterPage> {
   var state = true;
 
 
+  @override
   void initState() {
     super.initState();
     dbRef = FirebaseDatabase.instance.ref().child("Competitions/${widget.competitionId}/Players");
@@ -72,7 +73,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => HomeView()),
+                    MaterialPageRoute(builder: (context) => const HomeView()),
                   );
                 },
                 child: const Icon(Icons.developer_mode),
@@ -86,7 +87,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            LeaderBoard(score: score, name: teamName)),
+                            LeaderBoard(score: score, name: teamName,competitionId: widget.competitionId,)),
                   );
                 },
                 child: const Icon(Icons.leaderboard_rounded),
@@ -153,9 +154,10 @@ class _RegisterPageState extends State<RegisterPage> {
                     if (myController.text.isNotEmpty) {
                       popupTitle = "Registration Successful!";
                       popupMsg = "";
-                      Map<String, String> players = {
+                      Map<String, dynamic> players = {
                         'name': myController.text,
-                        'uuid':"",
+                        'uuid':v1,
+                        'score': 0,
                       };
                       //debugPrint("snapshot key-------------------> ${widget.competitionId}");
                       dbRef.push().set(players);
@@ -190,7 +192,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              const Questions()),
+                                               Questions(competitionId: widget.competitionId,)),
                                     );
                                   } else {
                                     FocusManager.instance.primaryFocus
@@ -275,13 +277,13 @@ class _RegisterPageState extends State<RegisterPage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const Questions()),
+                    MaterialPageRoute(builder: (context) =>  Questions(competitionId: widget.competitionId,)),
                   );
                 },
-                child: const Text("Continue"),
                 style: OutlinedButton.styleFrom(
                     minimumSize: const Size(150, 50),
                     backgroundColor: Colors.white),
+                child: const Text("Continue"),
               )),
             ),
             Visibility(
@@ -293,11 +295,11 @@ class _RegisterPageState extends State<RegisterPage> {
                     state = !state;
                   });
                 },
-                child: const Icon(Icons.restart_alt),
                 style: OutlinedButton.styleFrom(
                     foregroundColor: Colors.white,
                     minimumSize: const Size(50, 50),
                     backgroundColor: Colors.redAccent),
+                child: const Icon(Icons.restart_alt),
               )),
             )
           ],
