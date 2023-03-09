@@ -56,7 +56,7 @@ class _HomeViewState extends State<HomeView> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const AdminView()),
+                  MaterialPageRoute(builder: (context) =>  AdminView()),
                 );
               },
               child: const Text(

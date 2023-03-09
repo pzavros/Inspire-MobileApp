@@ -1,9 +1,11 @@
+import 'package:dilemma_game/admin_settings.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'create_view.dart';
 
 class AdminView extends StatefulWidget {
+ // final String competitionId;
   const AdminView({Key? key}) : super(key: key);
 
   @override
@@ -36,7 +38,10 @@ class _AdminViewState extends State<AdminView> {
               //TODO enter to the competition
             },
             onLongPress: (){
-              //TODO modify the competition
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) {
+                    return AdminPage(competitionId: competition['key']); // pass uuid to AdminSettings
+                  }));
             },
           )],
       ),
