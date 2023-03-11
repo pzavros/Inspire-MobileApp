@@ -11,3 +11,7 @@ Finished work on the prototype and presented it to the customer on the meeting. 
 ----------------------- Waiting for 2beconnected to come back up ------------------
 
 # Week 5 (24 Feb-03 March):
+
+# Week 6 (03 March-10 March):
+
+
