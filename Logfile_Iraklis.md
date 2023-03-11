@@ -7,7 +7,7 @@ Continued work on the mobile app with the team, had meeting to discuss progress.
 # Week 3 (10 Feb-17 Feb):
 Finished work on the prototype and presented it to the customer on the meeting. The team noted down the feedback, the customer was generally satisfied as the app seems to adhere to his requirements. Assigned new tasks, mainly in regards to the backend of the mobile app. Discussed different aspects of the necessary functionality mainly administrator authentication, user recognition and the different functionalities available while logged in as administrator.
 
-#Week 4 (17 Feb-24 Feb):
+# Week 4 (17 Feb-24 Feb):
 ----------------------- Waiting for 2beconnected to come back up ------------------
 
-#Week 5 (24 Feb-03 March):
+# Week 5 (24 Feb-03 March):
