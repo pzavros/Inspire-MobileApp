@@ -107,11 +107,11 @@ class _RegisterPageState extends State<RegisterPage> {
                       popupMsg = "";
                       Map<String, dynamic> players = {
                         'name': myController.text,
-                        'uuid': v1,
+                        // 'uuid': v1,
                         'score': 0,
                       };
                       //debugPrint("snapshot key-------------------> ${widget.competitionId}");
-                      dbRef.push().set(players);
+                      dbRef.child("$v1").set(players);
                     }
                     setState(() {
                       if (popupTitle == "Registration Successful!") {
