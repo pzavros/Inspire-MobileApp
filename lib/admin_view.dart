@@ -41,14 +41,14 @@ class _AdminViewState extends State<AdminView> {
               // print(competition['questions']);
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) {
-                    return AddQuestion(competitionId: competition['key'], currentIndex:competition['index'],); // pass the selected competition key
+                    return AddQuestion(competitionId: competition['key'], currentIndex:competition['index'],); // pass the selected competition key and the last array index of questions (can be null)
                   }));
             },
             onLongPress: (){
               //enter to the competition
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) {
-                    return AdminPage(competitionId: competition['key']); // pass the selected competition key
+                    return AdminPage(competitionId: competition['key'],listOfQuestions: competition['questions'],); // pass the selected competition key and a list of questions (cannot be null)
                   }));
             },
           )],

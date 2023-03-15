@@ -12,7 +12,8 @@ void main() {
 */
 class AdminPage extends StatefulWidget {
   final String competitionId;
-  const AdminPage({Key? key, required this.competitionId}) : super(key: key);
+  final List listOfQuestions;
+  const AdminPage({Key? key, required this.competitionId, required this.listOfQuestions}) : super(key: key);
 
   @override
   _AdminPageState createState() => _AdminPageState();
@@ -38,6 +39,14 @@ class _AdminPageState extends State<AdminPage> {
         FirebaseDatabase.instance.ref("Competitions/${widget.competitionId}");
 
 //Competitions
+
+    //TODO NOTE: de to paradigma Panagioty
+    /// estila to array me ta questions p to proigoumeno view (admin_view)
+    /// j ekama loop se olo to array p typoni sto terminal s
+    for (int i=0; i<widget.listOfQuestions.length; i++){
+      print('loop $i :${widget.listOfQuestions[i]}');
+    }
+    print("array: ${widget.listOfQuestions}");
   }
 
   Widget build(BuildContext context) {
