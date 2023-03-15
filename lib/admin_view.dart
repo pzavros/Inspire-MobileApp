@@ -1,7 +1,9 @@
 import 'package:dilemma_game/admin_settings.dart';
+import 'package:dilemma_game/class/question_obj.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
+import 'add_question_view.dart';
 import 'create_view.dart';
 
 class AdminView extends StatefulWidget {
@@ -31,16 +33,21 @@ class _AdminViewState extends State<AdminView> {
               competition ['name'],
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
             ),
-          //   subtitle:Text("status: ${competition ['status']}",
-          //       style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500,color: Colors.white),
-          // ),
+            subtitle:Text("key: ${competition ['key']}",
+                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500,color: Colors.lightGreen),
+          ),
             onTap: (){
-              //TODO enter to the competition
-            },
-            onLongPress: (){
+              //add question to the selected competition
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) {
-                    return AdminPage(competitionId: competition['key']); // pass uuid to AdminSettings
+                    return AddQuestion(competitionId: competition['key']); // pass the selected competition key
+                  }));
+            },
+            onLongPress: (){
+              //enter to the competition
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) {
+                    return AdminPage(competitionId: competition['key']); // pass the selected competition key
                   }));
             },
           )],
