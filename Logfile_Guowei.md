@@ -11,3 +11,5 @@
 # Week 4 (17 Feb-24 Feb):
 > Presented the application prototype to the client and was able to meet his expectation, furthermore the next step is to implement simple interactions with the backend which my role is to develop data storage that allows the creation of competition names stored in the database and present them in the home and create pages. Implemented a backend that allows the admin to insert the name of the competition into the firebase realtime database with some validation such as name cannot be empty while inserting, in addition the appropriate popup message will show up if the action was successful or failed.
 
+# Week 5 (3 Mar-10 Mar):
+> Further developed the app requirements, improved backend database structure (firebase realtime): upon successful register, player obj will append in the appropriate competition obj that's has been selected, initialized the functionality to add questions but need improvements
