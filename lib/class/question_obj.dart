@@ -1,8 +1,8 @@
-class QuestionList {
-  List<Question> question;
-
-  QuestionList({required this.question});
-}
+// class QuestionList {
+//   List<Question> question;
+//
+//   QuestionList({required this.question});
+// }
 
 
 class Question {
@@ -15,16 +15,16 @@ class Question {
     return Question(
         question: parsedJson['question'],
         answer : parsedJson['answer'],
-        timer : parsedJson ['answer']
+        timer : parsedJson ['timer']
     );
   }
 
-  // Map toJson()=>{
-  //   'question':question,
-  //   'answer':answer,
-  //   'timer':timer,
-  // };
-  //
+  Map toJson()=>{
+    'question':question,
+    'answer':answer,
+    'timer':timer,
+  };
+
   // @override
   // String toString() {
   //   return '{question: $question, answer: $answer, time:$timer}';

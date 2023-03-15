@@ -4,7 +4,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'add_question_view.dart';
-import 'create_view.dart';
+import 'add_competition_view.dart';
 
 class AdminView extends StatefulWidget {
  // final String competitionId;
@@ -38,9 +38,10 @@ class _AdminViewState extends State<AdminView> {
           ),
             onTap: (){
               //add question to the selected competition
+              // print(competition['questions']);
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) {
-                    return AddQuestion(competitionId: competition['key']); // pass the selected competition key
+                    return AddQuestion(competitionId: competition['key'], currntIndex:competition['index'],); // pass the selected competition key
                   }));
             },
             onLongPress: (){
@@ -81,7 +82,7 @@ class _AdminViewState extends State<AdminView> {
             onPressed: (){
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) {
-                    return const CreateView();
+                    return const AddCompetition();
                   }));
             },
           ),

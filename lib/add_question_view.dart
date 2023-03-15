@@ -1,42 +1,66 @@
-import 'package:dilemma_game/question_view.dart';
+import 'package:dilemma_game/Questions.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'class/question_obj.dart';
+
+
 
 class AddQuestion extends StatefulWidget {
-  const AddQuestion({required this.competitionId,Key? key}) : super(key: key);
+  const AddQuestion({required this.competitionId, required this.currntIndex,Key? key}) : super(key: key);
   final String competitionId;
+  final int? currntIndex;
 
   @override
   State<AddQuestion> createState() => _AddQuestionState();
 }
 
 class _AddQuestionState extends State<AddQuestion> {
+  // variables for the question form
   final qController = TextEditingController();
   final aController = TextEditingController();
   final tController = TextEditingController();
-
+  // initialize a reference of the firebase
   late DatabaseReference dbRef;
-  late String s;
   DatabaseReference db=FirebaseDatabase.instance.ref();
-  int cntQ=0;
+
+  int index=0;
+  List listOfQuestion=[];
+  late List <Question>? listOfObj;
+
+  @override
+  void initState() {
+    dbRef = FirebaseDatabase.instance.ref('Competitions/${widget.competitionId}/');
+    if(widget.currntIndex!=null){
+      index=(widget.currntIndex!+1);
+    }
+    print(widget.currntIndex);
+    //getData('Competitions/${widget.competitionId}/questions');
+    //(widget.questionArray!=null)?print(widget.questionArray):print(null);
+    // for (int i=0; i<widget.questionArray!.length; i++){
+    //   print(widget.questionArray![i]);
+    // }
+    //print(widget.questionArray);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   int getFromController(TextEditingController controller) {
     return int.parse(controller.value.text);
   }
 
-
-  @override
-  void initState() {
-    super.initState();
-    dbRef = FirebaseDatabase.instance.ref('Competitions/${widget.competitionId}/questions');
-  }
-
   Future<void> getData(String path) async {
     final snapshot =  await db.child(path).get();
     if (snapshot.exists) {
+      // listOfObj=snapshot.value;
+      //print(listOfObj);
       print(snapshot.value);
+      // print(snapshot.value.runtimeType);
     } else {
       print('No data available.');
     }
@@ -114,36 +138,38 @@ class _AddQuestionState extends State<AddQuestion> {
                 // navigate to show all question view
                 //Navigator.push(context, MaterialPageRoute(builder: (context) =>  const QuestionView()));
               },
-              child: const Text("show all questions",style: TextStyle(color: Colors.white, fontSize: 26),),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                const Text("Modify",style: TextStyle(color: Colors.white, fontSize: 26),),
+                  Container(width: 50,),
+              ],)
             ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
+        //add new question form (Q&A plus time in minutes)
         onPressed: () {
-          //add new question form (Q&A plus time in minutes)
-          //if(dbRef.child("$competitionKey/questions").onChildAdded)
           setState(() {
-            // cntQ++;
-            // dbRef.child("$cntQ").update({
-            //   'question':qController.text,
-            //   'answer':aController.text,
-            //   'timer':getFromController(tController),
-            // });
-            // Map<String, dynamic> question = {
-            //   'question':qController.text,
-            //   'answer':aController.text,
-            //   'timer':getFromController(tController),
-            // };
-            // dbRef.push().set(question);
-            //
-            // qController.clear();
-            // aController.clear();
-            // tController.clear();
-          });
-          //debugPrint("----------> question ${cntQ}");
-          getData("Competitions/${widget.competitionId}");
-
+            // keep a track of the index
+            dbRef.update({
+              'index':index,
+            });
+            // add question
+            dbRef.child("questions/$index").update({
+              'question':qController.text,
+              'answer':aController.text,
+              'timer':getFromController(tController),
+            });
+            // move to next position
+            index++;
+            // clear the form
+            qController.clear();
+            aController.clear();
+            tController.clear();
+          }
+          );
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
