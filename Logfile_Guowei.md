@@ -17,4 +17,4 @@
 > Further developed the app requirements, improved backend database structure and fixed some issues. Initialized the functionality to add questions but need improvements.
 
 # Week 7 (10 Mar-17 Mar):
-> As the previous implementation of question functionality did not worked as indented especially had issues and difficulties on how to handle the data. Therefor, question functionality has been redesigned and made improvements with the main focus on adding and fetching the data.
+> As the previous implementation of question functionality did not worked as indented especially had issues and difficulties on how to handle the data. Therefor, question functionality has been redesigned and made improvements with the main focus on adding and fetching the data. Furthermore, had considerations on how to modify the questions, that is when changing an existing question which shouldn't be an issue but when it comes to deletion, it encoders few problems.
