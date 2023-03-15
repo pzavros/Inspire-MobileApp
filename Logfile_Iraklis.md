@@ -11,7 +11,8 @@ Finished work on the prototype and presented it to the customer on the meeting. 
 ----------------------- Waiting for 2beconnected to come back up ------------------
 
 # Week 5 (24 Feb-03 March):
+Made adjustments to how the players and competitions are stored in the databse, mainly players were moved inside the competitions and now each competition has a set of players. The register page also now matches the rest of the app and some bugs were fixed in the leaderboard.
 
 # Week 6 (03 March-10 March):
-
+The team's primary focus continued to be the backend of the aplication, although some small changed/adjustments have been made to the design the team decided to fully focus on the functionality of the app and leave the design after everything is functional.
 
