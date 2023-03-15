@@ -41,7 +41,7 @@ class _AdminViewState extends State<AdminView> {
               // print(competition['questions']);
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) {
-                    return AddQuestion(competitionId: competition['key'], currntIndex:competition['index'],); // pass the selected competition key
+                    return AddQuestion(competitionId: competition['key'], currentIndex:competition['index'],); // pass the selected competition key
                   }));
             },
             onLongPress: (){
