@@ -2,6 +2,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'class/question_obj.dart';
+import 'modify_view.dart';
 
 
 
@@ -137,7 +138,7 @@ class _AddQuestionState extends State<AddQuestion> {
             child: MaterialButton(
                 onPressed: (){
                   // navigate to show all question view
-                  //Navigator.push(context, MaterialPageRoute(builder: (context) =>  const QuestionView()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) =>   QuestionView(competitionId: widget.competitionId,)));
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,

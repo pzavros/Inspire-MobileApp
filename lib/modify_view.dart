@@ -5,15 +5,28 @@ import 'package:flutter/material.dart';
 import 'admin_view.dart';
 
 class QuestionView extends StatefulWidget {
-  const QuestionView({Key? key}) : super(key: key);
+  const QuestionView({required this.competitionId, Key? key}) : super(key: key);
+  final String competitionId;
 
   @override
   State<QuestionView> createState() => _HomeViewState();
 }
 
 class _HomeViewState extends State<QuestionView> {
-  Query dbRef = FirebaseDatabase.instance.ref().child('Competitions');
-  DatabaseReference reference = FirebaseDatabase.instance.ref().child('Competitions');
+  Query dbRef = FirebaseDatabase.instance.ref();
+
+  @override
+  void initState() {
+    dbRef = FirebaseDatabase.instance.ref('Competitions/${widget.competitionId}/questions');
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+
 
   Widget myWidget({required Map competition}){
     return Container(
@@ -25,15 +38,12 @@ class _HomeViewState extends State<QuestionView> {
         physics: const NeverScrollableScrollPhysics(),
         children: [
           ListTile(
-            title: Text(
-              competition['name'],
-              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w500),),
-            subtitle:Text("status: ${competition ['key']}",
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500,color: Colors.lightGreen),),
-            trailing: const Icon(Icons.arrow_forward_ios),
-            //enter to remove question
+            title: Text('Question: ${competition['question']}',
+              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),),
+            subtitle:Text("Answer: ${competition ['answer']}",
+              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),),
             onTap: () {
-              //Navigator.push(context, MaterialPageRoute(builder: (context) =>  RegisterPage(competitionId:competition ['key'])));
+
             },
           )
         ],
@@ -46,23 +56,7 @@ class _HomeViewState extends State<QuestionView> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text("Math Competition",
-            style: TextStyle(
-              fontSize: 26,
-            )),
-        actions: [
-          ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) =>  const AdminView()),
-                );
-              },
-              child: const Text(
-                "Login",
-                style: TextStyle(fontSize: 18),
-              ))
-        ],
+        title: const Text("Modify", style: TextStyle(fontSize: 26,)),
       ),
       body: Container(
         height: double.infinity,

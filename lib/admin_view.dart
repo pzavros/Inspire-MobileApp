@@ -33,9 +33,8 @@ class _AdminViewState extends State<AdminView> {
               competition ['name'],
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
             ),
-            subtitle:Text("key: ${competition ['key']}",
-                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500,color: Colors.lightGreen),
-          ),
+            subtitle:(competition ['index']!=null)?Text("Total questions: ${competition ['index']+1}", style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500,color: Colors.lightGreen),)
+                :const Text("Total questions: 0",style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500,color: Colors.redAccent)),
             onTap: (){
               //add question to the selected competition
               // print(competition['questions']);
