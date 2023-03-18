@@ -13,7 +13,9 @@ void main() {
 class AdminPage extends StatefulWidget {
   final String competitionId;
   final List listOfQuestions;
-  const AdminPage({Key? key, required this.competitionId, required this.listOfQuestions}) : super(key: key);
+  const AdminPage(
+      {Key? key, required this.competitionId, required this.listOfQuestions})
+      : super(key: key);
 
   @override
   _AdminPageState createState() => _AdminPageState();
@@ -24,7 +26,9 @@ class _AdminPageState extends State<AdminPage> {
 
   late DatabaseReference dbRef;
   late String CompStatus = 'closed';
-
+  var i = 0;
+  bool isShown = false;
+  String showAnswer = "show answer";
   //late String popupTitle = "Fail";
   //late String popupMsg = "The name cannot be empty or name already exist.";
 
@@ -43,7 +47,7 @@ class _AdminPageState extends State<AdminPage> {
     //TODO NOTE: de to paradigma Panagioty
     /// estila to array me ta questions p to proigoumeno view (admin_view)
     /// j ekama loop se olo to array p typoni sto terminal s
-    for (int i=0; i<widget.listOfQuestions.length; i++){
+    for (int i = 0; i < widget.listOfQuestions.length; i++) {
       print('loop $i :${widget.listOfQuestions[i]}');
     }
     print("array: ${widget.listOfQuestions}");
@@ -102,8 +106,8 @@ class _AdminPageState extends State<AdminPage> {
                     };*/
                     // Only update the name, leave the age and address!
                     await dbRef.update({
-                    "status": 'open',
-                  });
+                      "status": 'open',
+                    });
                     //dbRef.push().set(status);
                     //dbRef.push().update(status);
 
@@ -158,18 +162,31 @@ class _AdminPageState extends State<AdminPage> {
                 ),
               ),
               const SizedBox(height: 20),
-              const Text(
-                'Question 1',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              Text(
+                widget.listOfQuestions[i]['question'].toString(),
+                style: TextStyle(fontSize: 18),
               ),
               const SizedBox(height: 10),
-              const Text(
-                'Answer 1',
-                style: TextStyle(fontSize: 18),
+              Visibility(
+                visible: isShown,
+                child: Text(
+
+                  widget.listOfQuestions[i]['answer'].toString(),
+                  style: TextStyle(fontSize: 18),
+                ),
               ),
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    isShown = !isShown;
+                    if (isShown == true){
+                      showAnswer = "hide answer";
+                    }
+                    else showAnswer = "show answer";
+
+                  });
+                },
                 style: ElevatedButton.styleFrom(
                   fixedSize: const Size(50, 50), // Set the button size
                   shape: const RoundedRectangleBorder(
@@ -178,13 +195,21 @@ class _AdminPageState extends State<AdminPage> {
                     ),
                   ),
                 ),
-                child: const Text(
-                  'Show answer',
+                child:  Text(
+                  showAnswer,
                   style: TextStyle(fontSize: 20),
                 ),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () async {
+                  setState(() {
+                    if (i < widget.listOfQuestions.length - 1) {
+                      i++;
+                    }
+                    isShown = false;
+                    showAnswer = "show answer";
+                  });
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green,
                   fixedSize: const Size(50, 50), // Set the button size
@@ -200,10 +225,12 @@ class _AdminPageState extends State<AdminPage> {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return HomeView(); // pass uuid to AdminSettings
-                  }));
+                onPressed: () async {
+                  //   Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  //     return HomeView(); // pass uuid to AdminSettings
+                  //   }));
+
+
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.red,
