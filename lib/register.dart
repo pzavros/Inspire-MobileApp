@@ -7,7 +7,8 @@ import 'Questions.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 class RegisterPage extends StatefulWidget {
-  const RegisterPage({required this.competitionId, Key? key}) : super(key: key);
+  final List listOfQuestions;
+  const RegisterPage({required this.competitionId, Key? key, required this.listOfQuestions}) : super(key: key);
   final String competitionId;
   // final FirebaseApp app;
 
@@ -139,7 +140,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                           builder: (context) => Questions(
                                                 competitionId:
                                                     widget.competitionId,
-                                              )),
+                                              listOfQuestions: widget.listOfQuestions)),
                                     );
                                   } else {
                                     FocusManager.instance.primaryFocus
@@ -165,7 +166,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => Questions(
-                              competitionId: widget.competitionId,
+                              competitionId: widget.competitionId, listOfQuestions: widget.listOfQuestions,
                             )),
                   );
                 },

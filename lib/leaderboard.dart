@@ -73,7 +73,7 @@ class _LeaderBoardState extends State<LeaderBoard> {
               ),
             ),
             trailing: Text(
-              "${widget.score} pts",
+              "${players['score']} pts",
               style: const TextStyle(
                 fontSize: 20,
                 letterSpacing: 1,

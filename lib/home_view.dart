@@ -34,7 +34,7 @@ class _HomeViewState extends State<HomeView> {
             //enter to the competition
             onTap: () {
               //debugPrint("------------------------------${competition ['key']}");
-              Navigator.push(context, MaterialPageRoute(builder: (context) =>  RegisterPage(competitionId:competition ['key'])));
+              Navigator.push(context, MaterialPageRoute(builder: (context) =>  RegisterPage(competitionId:competition ['key'], listOfQuestions: competition['questions'],)));
             },
           )
         ],
