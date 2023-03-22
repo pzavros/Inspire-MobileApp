@@ -76,7 +76,7 @@ class _QuestionsState extends State<Questions> {
       playerScore = event.snapshot.value as int;
      print(playerScore);
 
-     playerScore = playerScore+widget.listOfQuestions[0]['score'] as int;
+     playerScore = playerScore+widget.listOfQuestions[index]['point'] as int;
 
     },);
 

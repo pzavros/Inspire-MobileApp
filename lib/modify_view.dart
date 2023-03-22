@@ -1,6 +1,7 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'admin_view.dart';
 
@@ -13,11 +14,18 @@ class QuestionView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<QuestionView> {
+  // variables for the question form
+  final qController = TextEditingController();
+  final aController = TextEditingController();
+  final tController = TextEditingController();
+  final pController = TextEditingController();
   Query dbRef = FirebaseDatabase.instance.ref();
+  DatabaseReference db=FirebaseDatabase.instance.ref();
 
   @override
   void initState() {
     dbRef = FirebaseDatabase.instance.ref('Competitions/${widget.competitionId}/questions');
+    db = FirebaseDatabase.instance.ref('Competitions/${widget.competitionId}/questions');
     super.initState();
   }
 
@@ -27,27 +35,128 @@ class _HomeViewState extends State<QuestionView> {
   }
 
 
+  int getFromController(TextEditingController controller) {
+    return int.parse(controller.value.text);
+  }
 
   Widget myWidget({required Map competition}){
     return Container(
       margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
       padding: const EdgeInsets.all(10),
-      height: 90,
+      height: 120,
       color: Colors.grey[300],
-      child: ListView(
-        physics: const NeverScrollableScrollPhysics(),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          ListTile(
-            title: Text('Question: ${competition['question']}',
-              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),),
-            subtitle:Text("Answer: ${competition ['answer']}",
-              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),),
-            onTap: () {
-
-            },
-          )
-        ],
-      ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Question: ${competition['question']}'),
+            const SizedBox(height: 20,),
+            Text("Answer: ${competition ['answer']}"),
+            const SizedBox(height: 20,),
+            Row(
+              children: [
+                Text('Timer: ${competition['timer']}'),
+                const SizedBox(width: 60,),
+                Text('Point: ${competition['point']}'),
+              ],),
+          ],),
+        Container(height: double.infinity,width: 60,color: Colors.blue.shade200,
+          child: IconButton(onPressed: (){
+              showDialog(context: context,
+                builder: (context)=> AlertDialog(
+                  title:  Text('${competition['key']}'),
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      TextFormField(
+                        controller: qController,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          labelText: 'Question',
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      TextFormField(
+                        controller: aController,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          labelText: 'Answer',
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      TextFormField(
+                        controller: tController,
+                        keyboardType: TextInputType.number,
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          labelText: 'Timespan (min)',
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      TextFormField(
+                        controller: pController,
+                        keyboardType: TextInputType.number,
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          labelText: 'Score',
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                      TextButton(onPressed: () {
+                        qController.clear();
+                        aController.clear();
+                        tController.clear();
+                        pController.clear();
+                        Navigator.pop(context);
+                        }, child: const Text('CANCEL')),
+                      TextButton(onPressed: () {
+                        db.child('${competition['key']}').update({
+                          'question':qController.text,
+                          'answer':aController.text,
+                          'timer':getFromController(tController),
+                          'point':getFromController(pController),
+                        });
+                        qController.clear();
+                        aController.clear();
+                        tController.clear();
+                        pController.clear();
+                        Navigator.pop(context);
+                        }, child: const Text('APPLY')),
+                    ],)],
+                  ),
+                )
+              );
+            },icon: const Icon(Icons.mode),),),
+      ],)
     );
   }
 

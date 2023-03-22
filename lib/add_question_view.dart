@@ -20,6 +20,7 @@ class _AddQuestionState extends State<AddQuestion> {
   final qController = TextEditingController();
   final aController = TextEditingController();
   final tController = TextEditingController();
+  final pController = TextEditingController();
   // initialize a reference of the firebase
   late DatabaseReference dbRef;
   DatabaseReference db=FirebaseDatabase.instance.ref();
@@ -123,6 +124,23 @@ class _AddQuestionState extends State<AddQuestion> {
                   const SizedBox(
                     height: 10,
                   ),
+                  TextFormField(
+                    controller: pController,
+                    keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                      FilteringTextInputFormatter.digitsOnly
+                    ],
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      labelText: 'Score',
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
                 ],
               ),
             ],
@@ -163,6 +181,7 @@ class _AddQuestionState extends State<AddQuestion> {
                 'question':qController.text,
                 'answer':aController.text,
                 'timer':getFromController(tController),
+                'point':getFromController(pController),
               });
               // move to next position
               index++;
@@ -170,6 +189,7 @@ class _AddQuestionState extends State<AddQuestion> {
               qController.clear();
               aController.clear();
               tController.clear();
+              pController.clear();
             }
             );
           },
