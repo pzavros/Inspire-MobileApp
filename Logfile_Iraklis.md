@@ -16,3 +16,5 @@ Made adjustments to how the players and competitions are stored in the databse, 
 # Week 6 (03 March-10 March):
 The team's primary focus continued to be the backend of the aplication, although some small changed/adjustments have been made to the design the team decided to fully focus on the functionality of the app and leave the design after everything is functional.
 
+# Week 7 (10 March-17 March):
+Focused on the implementation of the actual quiz view that the player sees during play and made improvements to the structure of the data held in the database.
