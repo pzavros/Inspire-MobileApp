@@ -86,11 +86,11 @@ class _AddCompetitionState extends State<AddCompetition> {
                   onPressed: () async {
                     // competition name
                     if (nameController.text.isNotEmpty) {
-                      //TODO when name not empty, we also needs to check if name already exist in the database
                       popupTitle = "Success";
                       popupMsg = "New data has been added to the database.";
                       Map<String, dynamic> competition = {
                         'name': nameController.text,
+                        // 'status':'unpublished',
                       };
                       dbRef.push().set(competition);
                     }
