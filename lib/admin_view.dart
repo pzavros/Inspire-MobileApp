@@ -18,8 +18,19 @@ class _AdminViewState extends State<AdminView> {
   Query dbRef = FirebaseDatabase.instance.ref().child('Competitions');
   DatabaseReference reference = FirebaseDatabase.instance.ref().child('Competitions');
 
+  // List questionList=[];
+  // getQuestionList(String key) {
+  //   reference.child('$key/questions').onValue.listen((DatabaseEvent event) {
+  //      questionList= event.snapshot.value as List;
+  //   });
+  // }
+  
+  @override
+  void initState() {
+    super.initState();
+  }
+
   Widget listItem({required Map competition}) {
-    //debugPrint("Competition OBJ----> $competition");
     return Container(
       margin: const EdgeInsets.fromLTRB(10,10,10,0),
       padding: const EdgeInsets.all(10),
@@ -33,7 +44,7 @@ class _AdminViewState extends State<AdminView> {
               competition ['name'],
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
             ),
-            subtitle:(competition ['index']!=null)?Text("Total questions: ${competition ['index']+1}", style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500,color: Colors.lightGreen),)
+            subtitle:(competition ['questions']!=null)?Text("Total questions: ${competition ['index']}", style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500,color: Colors.lightGreen),)
                 :const Text("Total questions: 0",style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500,color: Colors.redAccent)),
             onTap: (){
               //add question to the selected competition
@@ -44,12 +55,17 @@ class _AdminViewState extends State<AdminView> {
                   }));
             },
             onLongPress: (){
+              print(competition['key']);
+              print(competition['questions']);
               //enter to the competition
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) {
                     return AdminPage(competitionId: competition['key'],listOfQuestions: competition['questions'],); // pass the selected competition key and a list of questions (cannot be null)
                   }));
             },
+            trailing: IconButton(onPressed: (){
+              reference.child(competition['key']).remove();
+              },icon: const Icon(Icons.delete,color: Colors.red,)),
           )],
       ),
     );
@@ -62,14 +78,13 @@ class _AdminViewState extends State<AdminView> {
         appBar: AppBar(
           title: const Text("Admin", style: TextStyle(fontSize: 26,)),
         ),
-        body: Container(
+        body: SizedBox(
             height: double.infinity,
             child:FirebaseAnimatedList(
               query: dbRef,
               itemBuilder: (BuildContext context, DataSnapshot snapshot, Animation<double> animation, int index) {
                 Map competition=snapshot.value as Map;
-                competition['key']=snapshot.key;// will give the generated unique id a name "key"
-                //debugPrint("snapshot key-------------------> ${snapshot.key}");
+                competition['key']=snapshot.key;
                 return listItem(competition: competition);
               },
             ) ,

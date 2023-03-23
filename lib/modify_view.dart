@@ -26,6 +26,7 @@ class _HomeViewState extends State<QuestionView> {
   void initState() {
     dbRef = FirebaseDatabase.instance.ref('Competitions/${widget.competitionId}/questions');
     db = FirebaseDatabase.instance.ref('Competitions/${widget.competitionId}/questions');
+
     super.initState();
   }
 
@@ -58,7 +59,7 @@ class _HomeViewState extends State<QuestionView> {
             Row(
               children: [
                 Text('Timer: ${competition['timer']}'),
-                const SizedBox(width: 60,),
+                const SizedBox(width: 50,),
                 Text('Point: ${competition['point']}'),
               ],),
           ],),
@@ -66,7 +67,12 @@ class _HomeViewState extends State<QuestionView> {
           child: IconButton(onPressed: (){
               showDialog(context: context,
                 builder: (context)=> AlertDialog(
-                  title:  Text('${competition['key']}'),
+                  title:  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [ const Text('Edit'),IconButton(onPressed: (){
+                      db.child('/${competition['key']}').remove();
+                      Navigator.pop(context);
+                      }, icon: const Icon(Icons.delete,color: Colors.red,))],),
                   content: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -122,7 +128,7 @@ class _HomeViewState extends State<QuestionView> {
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.0),
                           ),
-                          labelText: 'Score',
+                          labelText: 'Point',
                         ),
                       ),
                       const SizedBox(
@@ -138,8 +144,14 @@ class _HomeViewState extends State<QuestionView> {
                         pController.clear();
                         Navigator.pop(context);
                         }, child: const Text('CANCEL')),
-                      TextButton(onPressed: () {
-                        db.child('${competition['key']}').update({
+                      TextButton(
+                          onPressed: () {
+                            // this allow us to update a specific object
+                            if(qController.text.isEmpty){qController.text=competition['question'];}
+                            if(aController.text.isEmpty){aController.text=competition['answer'];}
+                            if(tController.text.isEmpty){tController.text=competition['timer'];}
+                            if(pController.text.isEmpty){pController.text=competition['point'];}
+                        db.child(competition['key']).update({
                           'question':qController.text,
                           'answer':aController.text,
                           'timer':getFromController(tController),

@@ -18,3 +18,6 @@
 
 # Week 7 (10 Mar-17 Mar):
 > As the previous implementation of question functionality did not worked as indented especially had issues and difficulties on how to handle the data. Therefor, question functionality has been redesigned and made improvements with the main focus on adding and fetching the data. Furthermore, had considerations on how to modify the questions, that is when changing an existing question which shouldn't be an issue but when it comes to deletion, it encoders few problems.
+
+# Week 7 (17 Mar-24 Mar):
+> Created a modify view for questions that allows the admin to update or delete an existing question, the functionality of removing the competition has been added and overall improved UI design.
