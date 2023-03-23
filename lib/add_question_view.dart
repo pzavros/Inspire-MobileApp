@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 import 'class/question_obj.dart';
 import 'modify_view.dart';
 
@@ -24,6 +28,8 @@ class _AddQuestionState extends State<AddQuestion> {
   // initialize a reference of the firebase
   late DatabaseReference dbRef;
   DatabaseReference db=FirebaseDatabase.instance.ref();
+  // image url
+  String imageURL='';
 
   int index=0;
   List listOfQuestion=[];
@@ -37,12 +43,12 @@ class _AddQuestionState extends State<AddQuestion> {
       index=(widget.currentIndex!+1);
     }
     // print(widget.currentIndex);
-    //getData('Competitions/${widget.competitionId}/questions');
-    //(widget.questionArray!=null)?print(widget.questionArray):print(null);
+    // getData('Competitions/${widget.competitionId}/questions');
+    // (widget.questionArray!=null)?print(widget.questionArray):print(null);
     // for (int i=0; i<widget.questionArray!.length; i++){
     //   print(widget.questionArray![i]);
     // }
-    //print(widget.questionArray);
+    // print(widget.questionArray);
     super.initState();
   }
 
@@ -138,8 +144,33 @@ class _AddQuestionState extends State<AddQuestion> {
                       labelText: 'Score',
                     ),
                   ),
-                  const SizedBox(
-                    height: 10,
+                  const SizedBox(height: 30),
+                  // upload picture
+                  const Text('upload the question picture here:',style: TextStyle(fontSize: 16)),
+                  const SizedBox(height: 15),
+                  IconButton(icon: const Icon(Icons.drive_folder_upload_rounded,size: 35,),
+                      onPressed: () async {
+                        // first pick a picture from the device
+                        ImagePicker imagePicker=ImagePicker();
+                        XFile? file =await imagePicker.pickImage(source: ImageSource.gallery);
+                        // if picture path is null terminate uploading progress
+                        if(file==null)return;
+                        // get firebase storage reference
+                        Reference rootRef=FirebaseStorage.instance.ref();
+                        // generate a unique key for the picture
+                        String uniqueKey=DateTime.now().millisecondsSinceEpoch.toString();
+                        // picture path
+                        Reference upload=rootRef.child('images/$uniqueKey');
+                        try{
+                          // upload
+                          await upload.putFile(File(file!.path));
+                          // get the image url
+                          imageURL= await upload.getDownloadURL();
+                        }
+                        catch(error){
+
+                        }
+                      },
                   ),
                 ],
               ),
