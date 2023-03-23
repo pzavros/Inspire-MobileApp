@@ -70,8 +70,10 @@ class _HomeViewState extends State<QuestionView> {
                   title:  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [ const Text('Edit'),IconButton(onPressed: (){
-                      db.child('/${competition['key']}').remove();
-                      Navigator.pop(context);
+                      // db.child('/${competition['key']}').remove();
+                      showDialog(context: context, builder: (context) =>  AlertDialog(title:const Text('Function not implemented yet.')
+                        ,content: TextButton(child: const Text('OK'),onPressed: () => Navigator.pop(context),),
+                      ),);
                       }, icon: const Icon(Icons.delete,color: Colors.red,))],),
                   content: Column(
                     mainAxisSize: MainAxisSize.min,
