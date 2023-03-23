@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'Questions.dart';
 import 'leaderboard.dart';
 import 'home_view.dart';
+import 'package:timer_count_down/timer_count_down.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 
@@ -27,15 +28,28 @@ class _AdminPageState extends State<AdminPage> {
   late DatabaseReference dbRef;
   late String CompStatus = 'closed';
   var i = 0;
+  var timer;
   bool isShown = false;
   String showAnswer = "show answer";
   //late String popupTitle = "Fail";
   //late String popupMsg = "The name cannot be empty or name already exist.";
 
+  void CountDownTimer () {
+    Countdown(seconds: timer,
+      build: (BuildContext context, double time) => Text(time.toString()),
+      interval: Duration(milliseconds: 100),
+      onFinished: () {
+        print('Timer is done!');
+      },
+
+    );
+  }
+
   @override
   void initState() {
     print(widget.competitionId);
     super.initState();
+    timer = widget.listOfQuestions[i]['timer'];
     //dbRef = FirebaseDatabase.instance.ref("Competitions");
     //dbRef = FirebaseDatabase.instance.ref().child("${widget.uuid}/Status");
     //dbRef = FirebaseDatabase.instance.ref("${widget.uuid}/Status");
@@ -59,6 +73,18 @@ class _AdminPageState extends State<AdminPage> {
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Admin Page'),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.home),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomeView()),
+                );
+              },
+            ),
+          ],
+
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -162,17 +188,40 @@ class _AdminPageState extends State<AdminPage> {
                 ),
               ),
               const SizedBox(height: 20),
-              Text(
-                widget.listOfQuestions[i]['question'].toString(),
-                style: TextStyle(fontSize: 18),
+              Container(
+                alignment: Alignment.center,
+                child: Text('Timer: ', style: TextStyle(
+                  fontSize: 24
+                ),),
+              ),
+              Container(
+                alignment: Alignment.center,
+                child: Countdown(
+                  seconds: timer,
+                  build: (BuildContext context, double time) => Text(time.toString()),
+                  interval: Duration(milliseconds: 100),
+                  onFinished: () {
+                    print('Timer is done!');
+                  },
+                ),
+              ),
+              Container(
+                alignment: Alignment.topLeft,
+                child: Text('Question:  '+
+                  widget.listOfQuestions[i]['question'].toString(),
+                  style: TextStyle(fontSize: 22),
+                ),
               ),
               const SizedBox(height: 10),
               Visibility(
                 visible: isShown,
-                child: Text(
-
-                  widget.listOfQuestions[i]['answer'].toString(),
-                  style: TextStyle(fontSize: 18),
+                child: Container(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    'Answer:  '+
+                    widget.listOfQuestions[i]['answer'].toString(),
+                    style: TextStyle(fontSize: 22),
+                  ),
                 ),
               ),
               const SizedBox(height: 20),
@@ -206,6 +255,7 @@ class _AdminPageState extends State<AdminPage> {
                     if (i < widget.listOfQuestions.length - 1) {
                       i++;
                     }
+                    timer = widget.listOfQuestions[i+1]['timer'];
                     isShown = false;
                     showAnswer = "show answer";
                   });
