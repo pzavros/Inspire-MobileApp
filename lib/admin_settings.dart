@@ -209,7 +209,7 @@ class _AdminPageState extends State<AdminPage> {
                 alignment: Alignment.topLeft,
                 child: Text('Question:  '+
                   widget.listOfQuestions[i]['question'].toString(),
-                  style: TextStyle(fontSize: 22),
+                  style: TextStyle(fontSize: 23),
                 ),
               ),
               const SizedBox(height: 10),
