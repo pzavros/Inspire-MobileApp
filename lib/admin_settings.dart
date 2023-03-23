@@ -220,7 +220,7 @@ class _AdminPageState extends State<AdminPage> {
                   child: Text(
                     'Answer:  '+
                     widget.listOfQuestions[i]['answer'].toString(),
-                    style: TextStyle(fontSize: 22),
+                    style: TextStyle(fontSize: 23),
                   ),
                 ),
               ),
