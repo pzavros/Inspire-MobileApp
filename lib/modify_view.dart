@@ -48,22 +48,35 @@ class _HomeViewState extends State<QuestionView> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-        Column(
+        Expanded(child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Question: ${competition['question']}'),
-            const SizedBox(height: 20,),
-            Text("Answer: ${competition ['answer']}"),
-            const SizedBox(height: 20,),
+            competition['image']?
+                ElevatedButton(onPressed: (){
+                  showDialog(context: context, builder: (context) => AlertDialog(title: Image.network(competition['question'],loadingBuilder: (context, child, loadingProgress) {
+                    if(loadingProgress!=null){return const CircularProgressIndicator();}
+                    return child;
+                  },),),);
+                  },child: const Text('View question image',maxLines: 3, overflow: TextOverflow.ellipsis,),)
+                :Text('Question: ${competition['question']}',maxLines: 3, overflow: TextOverflow.ellipsis,),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+              child: Text("Answer: ${competition ['answer']}"),
+            ),
             Row(
               children: [
                 Text('Timer: ${competition['timer']}'),
                 const SizedBox(width: 50,),
                 Text('Point: ${competition['point']}'),
               ],),
-          ],),
+          ],)),
         Container(height: double.infinity,width: 60,color: Colors.blue.shade200,
           child: IconButton(onPressed: (){
+              // preload question format
+              qController.text=competition['question'];
+              aController.text=competition['answer'];
+              tController.text=competition['timer'].toString();
+              pController.text=competition['point'].toString();
               showDialog(context: context,
                 builder: (context)=> SingleChildScrollView(
                   child: AlertDialog(
@@ -147,13 +160,8 @@ class _HomeViewState extends State<QuestionView> {
                               Navigator.pop(context);
                             }, child: const Text('CANCEL')),
                             TextButton(
+                              // update changes
                                 onPressed: () {
-
-                                  qController.text=competition['question'];
-                                  aController.text=competition['answer'];
-                                  tController.text=competition['timer'];
-                                  pController.text=competition['point'];
-
                                   db.child(competition['key']).update({
                                     'question':qController.text,
                                     'answer':aController.text,

@@ -30,6 +30,8 @@ class _AddQuestionState extends State<AddQuestion> {
   DatabaseReference db=FirebaseDatabase.instance.ref();
   // image url
   String imageURL='';
+  // variable to indicate whether the question type is image url
+  bool imageQuestion=false;
 
   int index=0;
   List listOfQuestion=[];
@@ -167,6 +169,7 @@ class _AddQuestionState extends State<AddQuestion> {
                           await upload.putFile(File(file!.path));
                           // get the image url
                           imageURL= await upload.getDownloadURL();
+
                         }
                         catch(error){
                         }
@@ -202,27 +205,38 @@ class _AddQuestionState extends State<AddQuestion> {
           child: const Icon(Icons.add),
           //add new question form (Q&A plus time in minutes)
           onPressed: () {
-            setState(() {
-              // keep a track of the index
-              dbRef.update({
-                'index':index,
-              });
-              // add question
-              dbRef.child("questions/$index").update({
-                'question':qController.text,
-                'answer':aController.text,
-                'timer':getFromController(tController),
-                'point':getFromController(pController),
-              });
-              // move to next position
-              index++;
-              // clear the form
-              qController.clear();
-              aController.clear();
-              tController.clear();
-              pController.clear();
+            // if the question type is image the override qController.text with the url image link
+            if(imageURL.isNotEmpty){
+              imageQuestion=true;
+              qController.text=imageURL;
             }
-            );
+            // verify that question, answer, timer, and point are not empty
+            if(qController.text.isEmpty || aController.text.isEmpty || tController.text.isEmpty || pController.text.isEmpty){
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Error: you must complete the from.')));
+              return;
+            }
+            // keep a track of the index
+            dbRef.update({
+              'index':index,
+            });
+            // add question
+            dbRef.child("questions/$index").update({
+              'question':qController.text,
+              'answer':aController.text,
+              'timer':getFromController(tController),
+              'point':getFromController(pController),
+              'image':imageQuestion
+            });
+            // move to next position
+            index++;
+            // Reset the form
+            qController.clear();
+            aController.clear();
+            tController.clear();
+            pController.clear();
+            imageURL='';
+            imageQuestion=false;
+
           },
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
