@@ -21,3 +21,6 @@
 
 # Week 7 (17 Mar-24 Mar):
 > Created a modify view for questions that allows the admin to update or delete an existing question, the functionality of removing the competition has been added and overall improved UI design.
+
+# Week 8 (24 Mar-31 Mar):
+> Additional features added, 1. users can join competitions that have status="open" otherwise an appropriate message will display, 2. fixed some errors caused by keyboard overflow, 3. verification for question form (must complete the form to add a question and notify the admin if success or fail), 4. admin can upload question in jpg,png format and view (retrieve) them in modify view, finally attempt to create a snack bar to indicate if the uploaded image was success or fail.
