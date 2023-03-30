@@ -169,9 +169,12 @@ class _AddQuestionState extends State<AddQuestion> {
                           await upload.putFile(File(file!.path));
                           // get the image url
                           imageURL= await upload.getDownloadURL();
-
+                          // notify the user
+                          const SnackBar(content: Text('Success: you have uploaded the image.'));
                         }
                         catch(error){
+                          // notify the user
+                            const SnackBar(content: Text('Fail: something went wrong.'));
                         }
                       },
                   ),
