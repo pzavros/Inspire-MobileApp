@@ -48,20 +48,23 @@ class _AdminViewState extends State<AdminView> {
                 :const Text("Total questions: 0",style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500,color: Colors.redAccent)),
             onTap: (){
               //add question to the selected competition
-              // print(competition['questions']);
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) {
                     return AddQuestion(competitionId: competition['key'], currentIndex:competition['index'],); // pass the selected competition key and the last array index of questions (can be null)
                   }));
             },
             onLongPress: (){
-              print(competition['key']);
-              print(competition['questions']);
-              //enter to the competition
+              // enter to the competition if questions list it's not null
+              if(competition['questions']!=null){
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) {
                     return AdminPage(competitionId: competition['key'],listOfQuestions: competition['questions'],); // pass the selected competition key and a list of questions (cannot be null)
                   }));
+              }
+              else{
+                // when null show error msg
+                showDialog(context: context, builder: (context) => const AlertDialog(title: Center(child: Text('Error: Question list is empty, touch unfocused area to dismiss.'))));
+              }
             },
             trailing: IconButton(onPressed: (){
               reference.child(competition['key']).remove();
