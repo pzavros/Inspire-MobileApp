@@ -35,7 +35,6 @@ class _HomeViewState extends State<QuestionView> {
     super.dispose();
   }
 
-
   int getFromController(TextEditingController controller) {
     return int.parse(controller.value.text);
   }
@@ -66,18 +65,19 @@ class _HomeViewState extends State<QuestionView> {
         Container(height: double.infinity,width: 60,color: Colors.blue.shade200,
           child: IconButton(onPressed: (){
               showDialog(context: context,
-                builder: (context)=> AlertDialog(
-                  title:  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [ const Text('Edit'),IconButton(onPressed: (){
-                      // db.child('/${competition['key']}').remove();
-                      showDialog(context: context, builder: (context) =>  AlertDialog(title:const Text('Function not implemented yet.')
-                        ,content: TextButton(child: const Text('OK'),onPressed: () => Navigator.pop(context),),
-                      ),);
+                builder: (context)=> SingleChildScrollView(
+                  child: AlertDialog(
+                    title:  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [ const Text('Edit'),IconButton(onPressed: (){
+                        // db.child('/${competition['key']}').remove();
+                        showDialog(context: context, builder: (context) =>  AlertDialog(title:const Text('Function not implemented yet.')
+                          ,content: TextButton(child: const Text('OK'),onPressed: () => Navigator.pop(context),),
+                        ),);
                       }, icon: const Icon(Icons.delete,color: Colors.red,))],),
-                  content: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
                       TextFormField(
                         controller: qController,
                         decoration: InputDecoration(
@@ -136,38 +136,40 @@ class _HomeViewState extends State<QuestionView> {
                       const SizedBox(
                         height: 10,
                       ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                      TextButton(onPressed: () {
-                        qController.clear();
-                        aController.clear();
-                        tController.clear();
-                        pController.clear();
-                        Navigator.pop(context);
-                        }, child: const Text('CANCEL')),
-                      TextButton(
-                          onPressed: () {
-                            // this allow us to update a specific object
-                            if(qController.text.isEmpty){qController.text=competition['question'];}
-                            if(aController.text.isEmpty){aController.text=competition['answer'];}
-                            if(tController.text.isEmpty){tController.text=competition['timer'];}
-                            if(pController.text.isEmpty){pController.text=competition['point'];}
-                        db.child(competition['key']).update({
-                          'question':qController.text,
-                          'answer':aController.text,
-                          'timer':getFromController(tController),
-                          'point':getFromController(pController),
-                        });
-                        qController.clear();
-                        aController.clear();
-                        tController.clear();
-                        pController.clear();
-                        Navigator.pop(context);
-                        }, child: const Text('APPLY')),
-                    ],)],
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            TextButton(onPressed: () {
+                              qController.clear();
+                              aController.clear();
+                              tController.clear();
+                              pController.clear();
+                              Navigator.pop(context);
+                            }, child: const Text('CANCEL')),
+                            TextButton(
+                                onPressed: () {
+
+                                  qController.text=competition['question'];
+                                  aController.text=competition['answer'];
+                                  tController.text=competition['timer'];
+                                  pController.text=competition['point'];
+
+                                  db.child(competition['key']).update({
+                                    'question':qController.text,
+                                    'answer':aController.text,
+                                    'timer':getFromController(tController),
+                                    'point':getFromController(pController),
+                                  });
+                                  qController.clear();
+                                  aController.clear();
+                                  tController.clear();
+                                  pController.clear();
+                                  Navigator.pop(context);
+                                }, child: const Text('APPLY')),
+                          ],)
+                    ],
                   ),
-                )
+                ),)
               );
             },icon: const Icon(Icons.mode),),),
       ],)

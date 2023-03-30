@@ -78,6 +78,7 @@ class _AddQuestionState extends State<AddQuestion> {
     return  GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
         appBar: AppBar(
           title: const Text("Add question"),
@@ -168,7 +169,6 @@ class _AddQuestionState extends State<AddQuestion> {
                           imageURL= await upload.getDownloadURL();
                         }
                         catch(error){
-
                         }
                       },
                   ),

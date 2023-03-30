@@ -44,7 +44,7 @@ class _AdminViewState extends State<AdminView> {
               competition ['name'],
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
             ),
-            subtitle:(competition ['questions']!=null)?Text("Total questions: ${competition ['index']}", style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500,color: Colors.lightGreen),)
+            subtitle:(competition ['questions']!=null)?Text("Total questions: ${competition ['index']+1}", style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500,color: Colors.lightGreen),)
                 :const Text("Total questions: 0",style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500,color: Colors.redAccent)),
             onTap: (){
               //add question to the selected competition
@@ -63,7 +63,7 @@ class _AdminViewState extends State<AdminView> {
               }
               else{
                 // when null show error msg
-                showDialog(context: context, builder: (context) => const AlertDialog(title: Center(child: Text('Error: Question list is empty, touch unfocused area to dismiss.'))));
+                showDialog(context: context, builder: (context) => const AlertDialog(title: Center(child: Text('Cannot start the competition because question list is empty, touch unfocused area to dismiss.'))));
               }
             },
             trailing: IconButton(onPressed: (){
