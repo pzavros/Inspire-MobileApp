@@ -19,8 +19,8 @@
 # Week 7 (10 Mar-17 Mar):
 > As the previous implementation of question functionality did not worked as indented especially had issues and difficulties on how to handle the data. Therefor, question functionality has been redesigned and made improvements with the main focus on adding and fetching the data. Furthermore, had considerations on how to modify the questions, that is when changing an existing question which shouldn't be an issue but when it comes to deletion, it encoders few problems.
 
-# Week 7 (17 Mar-24 Mar):
+# Week 8 (17 Mar-24 Mar):
 > Created a modify view for questions that allows the admin to update or delete an existing question, the functionality of removing the competition has been added and overall improved UI design.
 
-# Week 8 (24 Mar-31 Mar):
+# Week 9 (24 Mar-31 Mar):
 > Additional features added, 1. users can join competitions that have status="open" otherwise an appropriate message will display, 2. fixed some errors caused by keyboard overflow, 3. verification for question form (must complete the form to add a question and notify the admin if success or fail), 4. admin can upload question in jpg,png format and view (retrieve) them in modify view, finally attempt to create a snack bar to indicate if the uploaded image was success or fail.
