@@ -1,3 +1,4 @@
+import 'package:dilemma_game/waiting_for_admin.dart';
 import 'package:flutter/material.dart';
 import 'main.dart';
 import 'home_view.dart';
@@ -64,8 +65,6 @@ class _RegisterPageState extends State<RegisterPage> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => LeaderBoard(
-                              score: score,
-                              name: teamName,
                               competitionId: widget.competitionId,
                             )),
                   );
@@ -137,7 +136,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => Questions(
+                                          builder: (context) => Waiting(
                                                 competitionId:
                                                     widget.competitionId,
                                               listOfQuestions: widget.listOfQuestions)),
@@ -165,7 +164,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => Questions(
+                        builder: (context) => Waiting(
                               competitionId: widget.competitionId, listOfQuestions: widget.listOfQuestions,
                             )),
                   );
@@ -176,22 +175,6 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: const Text("Continue",style: TextStyle(color: Colors.black),),
               )),
             ),
-            Visibility(
-              visible: !state,
-              child: Center(
-                  child: OutlinedButton(
-                onPressed: () {
-                  setState(() {
-                    state = !state;
-                  });
-                },
-                style: OutlinedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    minimumSize: const Size(50, 50),
-                    backgroundColor: Colors.redAccent),
-                child: const Icon(Icons.restart_alt),
-              )),
-            )
           ],
         ),
       ),

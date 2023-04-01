@@ -99,8 +99,6 @@ class _QuestionsState extends State<Questions> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => LeaderBoard(
-                    score: score,
-                    name: "test",
                     competitionId: widget.competitionId,
                   ),
                 ),
@@ -117,48 +115,6 @@ class _QuestionsState extends State<Questions> {
             const SizedBox(
               height: 50,
             ),
-            // Expanded(
-            //   child: Row(
-            //     crossAxisAlignment: CrossAxisAlignment.center,
-            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //     children: <Widget>[
-            //       Container(
-            //         padding: const EdgeInsets.all(8.0),
-            //         decoration: BoxDecoration(
-            //           borderRadius: BorderRadius.circular(10.0),
-            //           color: Colors.grey[300],
-            //         ),
-            //         child: Text(
-            //           teamName,
-            //           style: const TextStyle(
-            //             fontSize: 20,
-            //           ),
-            //         ),
-            //       ),
-            //       Container(
-            //           padding: const EdgeInsets.all(8.0),
-            //           decoration: BoxDecoration(
-            //             borderRadius: BorderRadius.circular(10.0),
-            //             color: Colors.grey[300],
-            //           ),
-            //           child: Text(
-            //             "Score: $score",
-            //             style: const TextStyle(fontSize: 22.0),
-            //           )),
-            //       Container(
-            //         padding: const EdgeInsets.all(8.0),
-            //         decoration: BoxDecoration(
-            //           borderRadius: BorderRadius.circular(10.0),
-            //           color: Colors.grey[300],
-            //         ),
-            //         child: const Text(
-            //           "Time: ",
-            //           style: TextStyle(fontSize: 20),
-            //         ),
-            //       )
-            //     ],
-            //   ),
-            // ),
             const SizedBox(
               height: 100,
             ),
@@ -166,7 +122,7 @@ class _QuestionsState extends State<Questions> {
               "Question ${index+1} of ${widget.listOfQuestions.length}",
               style: const TextStyle(fontSize: 22.0)
             ),
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
             Text(
@@ -233,8 +189,6 @@ class _QuestionsState extends State<Questions> {
             context,
             MaterialPageRoute(
                 builder: (context) => LeaderBoard(
-                      score: score,
-                      name: "test",
                       competitionId: widget.competitionId,
                     )));
       } else {
