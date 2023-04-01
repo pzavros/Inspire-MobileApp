@@ -73,7 +73,6 @@ class _LeaderBoardState extends State<LeaderBoard> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Leaderboard'),
-        backgroundColor: Colors.indigo,
       ),
       body: SizedBox(
         height: double.infinity,
