@@ -20,32 +20,59 @@ class _HomeViewState extends State<HomeView> {
       margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
       padding: const EdgeInsets.all(10),
       height: 90,
-      color: Colors.grey[300],
+      decoration: BoxDecoration(
+        color: Colors.black.withOpacity(0.3),
+        borderRadius: BorderRadius.circular(20),
+      ),
       child: ListView(
         physics: const NeverScrollableScrollPhysics(),
         children: [
           ListTile(
             title: Text(
               competition['name'],
-              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w500),),
-            subtitle:Text("status: ${competition ['status']??'--'}",
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500,color: Colors.indigoAccent),),
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
+            ),
+            subtitle: Text(
+              "status: ${competition['status'] ?? '--'}",
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                color: Colors.indigoAccent,
+              ),
+            ),
             trailing: const Icon(Icons.arrow_forward_ios),
             onTap: () {
               // on tap enter to the competition if questions list it's not null
-              if(competition['questions']!=null
-                  && competition ['status']=='open'
-              ) {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) =>  RegisterPage(competitionId:competition ['key'], listOfQuestions: competition['questions'],)));
-              }
-              else{
+              if (competition['questions'] != null && competition['status'] == 'open') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => RegisterPage(
+                      competitionId: competition['key'],
+                      listOfQuestions: competition['questions'],
+                    ),
+                  ),
+                );
+              } else {
                 // show msg when competition is not open
-                showDialog(context: context, builder: (context) => const AlertDialog(title: Center(child: Text('The selected competition is not ready, touch unfocused area to dismiss.'))));
+                showDialog(
+                  context: context,
+                  builder: (context) => const AlertDialog(
+                    title: Center(
+                      child: Text(
+                        'The selected competition is not ready, touch unfocused area to dismiss.',
+                      ),
+                    ),
+                  ),
+                );
               }
-          })
+            },
+          ),
         ],
       ),
     );
+
+
   }
 
   @override
