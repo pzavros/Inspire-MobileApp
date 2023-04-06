@@ -154,13 +154,22 @@ class _AdminPageState extends State<AdminPage> {
                   }
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green,
-                  fixedSize: const Size(50, 50), // Set the button size
+                  fixedSize: const Size(150, 50), // Set the button size
                   shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(
-                      Radius.circular(20), // Set the button shape
+                      Radius.circular(8), // Set the button shape
                     ),
                   ),
+                  primary: Colors.green, // Set the background color of the button
+                  onPrimary: Colors.white, // Set the text color of the button
+                  padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16), // Add some padding
+                  textStyle: const TextStyle(
+                    fontSize: 18, // Set the font size of the text
+                    fontWeight: FontWeight.bold, // Set the font weight of the text
+                    letterSpacing: 0.5, // Add some letter spacing for better readability
+                  ),
+                  elevation: 4, // Set the elevation of the button
+                  shadowColor: Colors.grey, // Set the shadow color of the button
                 ),
                 child: const Text(
                   'Open competition',
