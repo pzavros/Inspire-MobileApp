@@ -1,5 +1,6 @@
 import 'package:dilemma_game/admin_settings.dart';
 import 'package:dilemma_game/class/question_obj.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,8 @@ class AdminView extends StatefulWidget {
 }
 
 class _AdminViewState extends State<AdminView> {
+  final user = FirebaseAuth.instance.currentUser!;
+
   Query dbRef = FirebaseDatabase.instance.ref().child('Competitions');
   DatabaseReference reference = FirebaseDatabase.instance.ref().child('Competitions');
 
@@ -79,7 +82,18 @@ class _AdminViewState extends State<AdminView> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title: const Text("Admin", style: TextStyle(fontSize: 26,)),
+          title: Text(user.email!, style: const TextStyle(fontSize: 20)),
+          actions: [
+            ElevatedButton(
+                onPressed: () {
+                  FirebaseAuth.instance.signOut();
+                  Navigator.pop(context);
+                },
+                child: const Text(
+                  "Logout",
+                  style: TextStyle(fontSize: 18),
+                ))
+          ],
         ),
         body: SizedBox(
             height: double.infinity,

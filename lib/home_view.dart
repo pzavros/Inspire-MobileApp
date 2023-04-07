@@ -1,3 +1,5 @@
+import 'package:dilemma_game/login.dart';
+
 import 'register.dart';
 import 'package:flutter/material.dart';
 import 'admin_view.dart';
@@ -89,7 +91,8 @@ class _HomeViewState extends State<HomeView> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) =>  AdminView()),
+                  // MaterialPageRoute(builder: (context) =>  AdminView()),
+                  MaterialPageRoute(builder: (context) =>  const Login()),
                 );
               },
               child: const Text(
