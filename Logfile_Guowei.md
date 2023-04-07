@@ -24,3 +24,6 @@
 
 # Week 9 (24 Mar-31 Mar):
 > Additional features added, 1. users can join competitions that have status="open" otherwise an appropriate message will display, similarly admin can open competition if there is at least one question, 2. fixed some errors caused by keyboard overflow, 3. verification for question form (must complete the form to add a question and notify the admin if success or fail), 4. admin can upload question in jpg, png format and view (retrieve) them in modify view, finally attempt to create a snack bar to indicate if the uploaded image was success or failure.
+
+# Week 10 (31 Mar-7 Apr):
+> Finalized the app, and added authentication login and logout functionalities moreover the admin can fully control the competition while the game is being played.
