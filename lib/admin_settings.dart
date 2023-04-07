@@ -56,6 +56,10 @@ class _AdminPageState extends State<AdminPage> {
     dbRef =
         FirebaseDatabase.instance.ref("Competitions/${widget.competitionId}");
 
+    dbRef.update({
+      'position':0
+    });
+
 //Competitions
 
     //TODO NOTE: de to paradigma Panagioty
