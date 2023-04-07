@@ -127,7 +127,7 @@ class _AddQuestionState extends State<AddQuestion> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
-                      labelText: 'Timespan (min)',
+                      labelText: 'Timespan (sec)',
                     ),
                   ),
                   const SizedBox(

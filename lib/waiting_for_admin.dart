@@ -120,121 +120,121 @@ class _WaitingState extends State<Waiting> {
                 ],
               ),
             )
-          : Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Visibility(
-                  visible: submit,
-                  child: Column(
-                      //A column that contains The First row
-                      children: [
-                        const SizedBox(
-                          height: 50,
+          : Center(
+            child: SingleChildScrollView(
+              child: Column(
+            children: [
+              Visibility(
+                visible: submit,
+                child: Column(
+                  //A column that contains The First row
+                    children: [
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                          "Question ${index + 1} of ${widget.listOfQuestions.length}",
+                          style: const TextStyle(fontSize: 22.0)),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      (widget.listOfQuestions[index]['image'])?SizedBox(height: 400,width: 340, child: Image.network(widget.listOfQuestions[index]['question']),):
+                      Text(
+                        widget.listOfQuestions[index]['question'].toString(),
+                        style: const TextStyle(
+                          fontSize: 20.0,
                         ),
-                        const SizedBox(
-                          height: 100,
-                        ),
-                        Text(
-                            "Question ${index + 1} of ${widget.listOfQuestions.length}",
-                            style: const TextStyle(fontSize: 22.0)),
-                        const SizedBox(
-                          height: 50,
-                        ),
-                        Text(
-                          widget.listOfQuestions[index]['question'].toString(),
-                          style: const TextStyle(
-                            fontSize: 20.0,
-                          ),
-                        ),
-                        const Padding(padding: EdgeInsets.all(10.0)),
-                        TextFormField(
-                          controller: myController,
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              labelText: 'Enter Answer',
-                              labelStyle: const TextStyle(fontSize: 18)),
-                        ),
-                        MaterialButton(
-                            minWidth: 240.0,
-                            height: 30.0,
-                            color: Colors.blue,
-                            onPressed: () {
-                              if (myController.text ==
-                                  widget.listOfQuestions[index]['answer']
-                                      .toString()) {
-                                //debugPrint("snapshot key-------------------> ${widget.competitionId}");
+                      ),
+                      const Padding(padding: EdgeInsets.all(10.0)),
+                      TextFormField(
+                        controller: myController,
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            labelText: 'Enter Answer',
+                            labelStyle: const TextStyle(fontSize: 18)),
+                      ),
+                      MaterialButton(
+                          minWidth: 240.0,
+                          height: 30.0,
+                          color: Colors.blue,
+                          onPressed: () {
+                            if (myController.text ==
+                                widget.listOfQuestions[index]['answer']
+                                    .toString()) {
+                              //debugPrint("snapshot key-------------------> ${widget.competitionId}");
 
-                                if (index <
-                                    widget.listOfQuestions.length - 1) {
-                                  // setState(() {
-                                  //   index = dbRefStatusPosition.child("/position").onValue as int;
-                                  // });
-                                } else {
-                                  //placeholder
-
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => LeaderBoard(
-                                          competitionId:
-                                              widget.competitionId,
-                                        ),
-                                      ));
-                                }
-
-                                dbRef.update({"score": playerScore});
-                                dbRef.child("answer").set(myController.text);
+                              if (index <
+                                  widget.listOfQuestions.length - 1) {
+                                // setState(() {
+                                //   index = dbRefStatusPosition.child("/position").onValue as int;
+                                // });
                               } else {
+                                //placeholder
 
-                                if (index <
-                                    widget.listOfQuestions.length - 1) {
-                                  // setState(() {
-                                  //   index = dbRefStatusPosition.child("/position").onValue as int;
-                                  //
-                                  // });
-                                } else {
-                                  Navigator.push(
+                                Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => LeaderBoard(
-                                              competitionId:
-                                                  widget.competitionId,
-                                            )),
-                                  );
-                                }
+                                      builder: (context) => LeaderBoard(
+                                        competitionId:
+                                        widget.competitionId,
+                                      ),
+                                    ));
                               }
-                              dbRef.child("Question $index answer").set(myController.text);
-                              setState(() {
-                                submit = false;
-                              });
-                            },
-                            child: const Text(
-                              "Submit",
-                              style: TextStyle(
-                                  fontSize: 18.0, color: Colors.white),
-                            )),
-                        const Padding(padding: EdgeInsets.all(15.0)),
-                      ]),
-                ),
-                Visibility(
-                  visible: !submit,
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Text("Waiting for administrator",
-                            style: TextStyle(fontSize: 22)),
-                        SizedBox(height: 15),
-                        CircularProgressIndicator(),
-                      ],
-                    ),
+
+                              dbRef.update({"score": playerScore});
+                              dbRef.child("answer").set(myController.text);
+                            } else {
+
+                              if (index <
+                                  widget.listOfQuestions.length - 1) {
+                                // setState(() {
+                                //   index = dbRefStatusPosition.child("/position").onValue as int;
+                                //
+                                // });
+                              } else {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => LeaderBoard(
+                                        competitionId:
+                                        widget.competitionId,
+                                      )),
+                                );
+                              }
+                            }
+                            dbRef.child("Question $index answer").set(myController.text);
+                            setState(() {
+                              submit = false;
+                            });
+                          },
+                          child: const Text(
+                            "Submit",
+                            style: TextStyle(
+                                fontSize: 18.0, color: Colors.white),
+                          )),
+                      const Padding(padding: EdgeInsets.all(15.0)),
+                    ]),
+              ),
+              Visibility(
+                visible: !submit,
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Text("Waiting for administrator",
+                          style: TextStyle(fontSize: 22)),
+                      SizedBox(height: 15),
+                      CircularProgressIndicator(),
+                    ],
                   ),
-                )
-              ],
-            ),
+                ),
+              )
+            ],
+        ),
+      ),
+          ),
     );
   }
 }

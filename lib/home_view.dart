@@ -60,7 +60,7 @@ class _HomeViewState extends State<HomeView> {
                   builder: (context) => const AlertDialog(
                     title: Center(
                       child: Text(
-                        'The selected competition is not ready, touch unfocused area to dismiss.',
+                        'Please selected the competition that have status open, touch unfocused area to dismiss.',
                       ),
                     ),
                   ),

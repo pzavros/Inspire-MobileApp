@@ -90,6 +90,8 @@ class _AddCompetitionState extends State<AddCompetition> {
                       popupMsg = "New data has been added to the database.";
                       Map<String, dynamic> competition = {
                         'name': nameController.text,
+                        'state':'holding',
+                        'position':0,
                         // 'status':'unpublished',
                       };
                       dbRef.push().set(competition);
