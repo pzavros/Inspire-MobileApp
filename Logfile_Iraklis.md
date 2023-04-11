@@ -25,5 +25,5 @@
 # Week 9 (24 Mar-31 Mar):
 > Created a new page "waiting_for_admin" to add the required functionality discussed last week. Implemented the functionalities and now flow of the game depends on administrator input. Also combined the "Questions" page and the "waiting_for_admin" page rendering the "Questions" page obsolete.
 
-# Week 9 (31 Mar-07 Mar):
+# Week 10 (31 Mar-07 Mar):
 > Presented the current app to the customer who was generally satisfied, the main functionality missing is the timer which will be implemented by the team during summer.
