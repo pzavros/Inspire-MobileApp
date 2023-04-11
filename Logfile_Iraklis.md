@@ -8,7 +8,7 @@
 > Finished work on the prototype and presented it to the customer on the meeting. The team noted down the feedback, the customer was generally satisfied as the app seems to adhere to his requirements. Assigned new tasks, mainly in regards to the backend of the mobile app. Discussed different aspects of the necessary functionality mainly administrator authentication, user recognition and the different functionalities available while logged in as administrator.
 
 # Week 4 (17 Feb-24 Feb):
------------------------ Waiting for 2beconnected to come back up ------------------
+Had a very busy week, worked a lot on the backend of the application mainly sending and retrieving player team names to and from the database. Had multiple discussions with team members and learned alot about firebase. In general made significant progress. in fact the team managed to complete some of the requirements for next week.
 
 # Week 5 (24 Feb-03 March):
 > Made adjustments to how the players and competitions are stored in the databse, mainly players were moved inside the competitions and now each competition has a set of players. The register page also now matches the rest of the app and some bugs were fixed in the leaderboard.
